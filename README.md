@@ -16,10 +16,10 @@ PRODUIRE On produit un prototype, un produit viable minimun
 => On interview 2, 3 personnes (Une interview par personae) :
 	On lui demande combien il mettrait dedans
 
-MESURER : On met en place un systéme de mesure
+MESURER On met en place un systéme de mesure
 
 => on analyse les données
 
-APPRENDRE : 
- 	Soit on pivote a nouveau si l'appli plait
- 	Sinon on arrete
+APPRENDRE 
+ 	- Soit on pivote a nouveau si l'appli plait
+ 	- Sinon on arrete
