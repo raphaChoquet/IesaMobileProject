@@ -22,9 +22,8 @@ MESURER On met en place un systéme de mesure
 
 APPRENDRE 
 
- - Soit on pivote a nouveau si l'appli plait
- - Sinon on arrete
-
+- Soit on pivote a nouveau si l'appli plait
+- Sinon on arret
 
 Premiére journée
 ================
