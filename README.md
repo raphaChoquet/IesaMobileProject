@@ -23,3 +23,17 @@ MESURER On met en place un systéme de mesure
 APPRENDRE 
  	- Soit on pivote a nouveau si l'appli plait
  	- Sinon on arrete
+
+
+Premiére journée
+================
+
+- Application IOS et Android
+- Coquille vide 
+- Api Contacts
+- Api Camera
+- Api Geolocalisation
+
+- Plus :
+	- Globalization
+	- Unit tests
