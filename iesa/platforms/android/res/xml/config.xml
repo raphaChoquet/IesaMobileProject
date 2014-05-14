@@ -18,11 +18,18 @@
         <param name="android-package" value="org.apache.cordova.GeoBroker" />
     </feature>
     <feature name="Contacts">
+<<<<<<< HEAD
         <param name="ios-package" value="CDVContacts" />
         <param name="android-package" value="org.apache.cordova.ContactManager" />
     </feature>
     <feature name="Camera">
         <param name="ios-package" value="CDVCamera" />
         <param name="android-package" value="org.apache.cordova.CameraLauncher" />
+=======
+        <param name="android-package" value="org.apache.cordova.contacts.ContactManager" />
+    </feature>
+    <feature name="Camera">
+        <param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
+>>>>>>> b67c1780db5ef08f1aff3ad9f5759310b9d3c9dc
     </feature>
 </widget>
