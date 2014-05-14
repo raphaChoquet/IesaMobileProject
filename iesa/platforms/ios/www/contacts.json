@@ -1,0 +1,18 @@
+{
+    "contacts": [
+                 {
+                 "prenom": "Elvire",
+                 "nom": "Akle",
+                 "fonction": "Coordinatrice pédagogique",
+                 "email": "e.akle@iesamultimedia.fr",
+                 "phone": "01 73 54 13 05"
+                 },
+                 {
+                 "prenom": "Pierre-Edouard",
+                 "nom": "Schmitt",
+                 "fonction": "King",
+                 "email": "pe.schmitt@iesamultimedia.fr",
+                 "phone": "01 73 54 13 00"
+                 }
+                 ]
+}
