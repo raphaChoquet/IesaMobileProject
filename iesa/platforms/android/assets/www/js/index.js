@@ -32,6 +32,10 @@ var app = {
         document.addEventListener('deviceready', this.onDeviceReady, false);
     },
 
+
+
+
+    // GEOLOC: << BEGIN
     // onSuccess Callback
     //   This method accepts a `Position` object, which contains
     //   the current GPS coordinates
@@ -77,6 +81,7 @@ var app = {
 
 
     initializeMap: function () {
+        alert('init map');
         $('#map-canvas').height($(window).height()-$('#header').height()-$('#map-canvas').parent().outerHeight()-90);
         var mapOptions = {
           center: new google.maps.LatLng(48.8689041, 2.337638),
@@ -91,29 +96,8 @@ var app = {
 
         var watchID = navigator.geolocation.watchPosition(app.onSuccess, app.onError);
     },
+    // GEOLOC: << END
 
-    // deviceready Event Handler
-    //
-    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-    // function, we must explicity call 'app.receivedEvent(...);'
-    onDeviceReady: function() {
-        //document.addEventListener('deviceready', , false);
-        
-        $("#map").on('pagecreate', app.initializeMap);
-
-        //google.maps.event.addDomListener(window, 'load', app.initializeMap);
-        app.receivedEvent('deviceready');
-    },
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
-
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
-        console.log('Received Event: ' + id);
-    }
 
     // CONTACTSAPI:6/7 << BEGIN
     loadContact: function() {
@@ -264,7 +248,11 @@ var app = {
                    });
         });
         
-        
+        $("#map").on('pagecreate', app.initializeMap);
+        $("#map").on('pagecreate', function () {
+            alert('mapCreate');
+        });
+
         // CONTACTSAPI:5/7
        /* var loadContactButton = document.getElementById('loadContactButton');
         loadContactButton.addEventListener('click', function(event) { app.loadContact(event); }, true);*/
@@ -283,6 +271,7 @@ var app = {
         var choosePictureLibrary = document.getElementById('choosePictureLibrary');
         choosePictureLibrary.addEventListener('click', function(event) { app.choosePictureLibrary(event); }, true);
         
+
         app.receivedEvent('deviceready');
     },
     
