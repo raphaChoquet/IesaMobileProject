@@ -132,6 +132,13 @@ module.exports = [
         "clobbers": [
             "CameraPopoverHandle"
         ]
+    },
+    {
+        "file": "plugins/com.danielcwilson.plugins.googleanalytics/www/analytics.js",
+        "id": "com.danielcwilson.plugins.googleanalytics.UniversalAnalytics",
+        "clobbers": [
+            "analytics"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -139,7 +146,8 @@ module.exports.metadata =
 {
     "org.apache.cordova.geolocation": "0.3.7",
     "org.apache.cordova.contacts": "0.2.10",
-    "org.apache.cordova.camera": "0.2.9"
+    "org.apache.cordova.camera": "0.2.9",
+    "com.danielcwilson.plugins.googleanalytics": "0.4.1"
 }
 // BOTTOM OF METADATA
 });

@@ -21,4 +21,8 @@
         <param name="ios-package" value="CDVCamera" />
         <param name="android-package" value="org.apache.cordova.CameraLauncher" />
     </feature>
+    <feature name="UniversalAnalytics">
+      <param name="ios-package" value="UniversalAnalyticsPlugin" />
+      <param name="android-package" value="com.danielcwilson.plugins.analytics.UniversalAnalyticsPlugin" />
+    </feature>
 </widget>

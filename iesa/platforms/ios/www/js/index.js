@@ -241,6 +241,8 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
+        analytics.startTrackerWithId('UA-50987453-1');
+        analytics.trackView('Home');
         
         $.getJSON( "contacts.json", function( data ) {
                   $.each(data.contacts, function(key, val){
