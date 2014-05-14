@@ -1,0 +1,25 @@
+/Applications/MAMP/htdocs/iesa/platforms/android/ant-build/IESA.ap_ \
+ : /Applications/MAMP/htdocs/iesa/platforms/android/res/drawable/icon.png \
+/Applications/MAMP/htdocs/iesa/platforms/android/res/drawable-hdpi/icon.png \
+/Applications/MAMP/htdocs/iesa/platforms/android/res/drawable-ldpi/icon.png \
+/Applications/MAMP/htdocs/iesa/platforms/android/res/drawable-mdpi/icon.png \
+/Applications/MAMP/htdocs/iesa/platforms/android/res/drawable-xhdpi/icon.png \
+/Applications/MAMP/htdocs/iesa/platforms/android/res/values/strings.xml \
+/Applications/MAMP/htdocs/iesa/platforms/android/res/xml/config.xml \
+/Applications/MAMP/htdocs/iesa/platforms/android/ant-build/res/drawable/icon.png \
+/Applications/MAMP/htdocs/iesa/platforms/android/ant-build/res/drawable-hdpi/icon.png \
+/Applications/MAMP/htdocs/iesa/platforms/android/ant-build/res/drawable-ldpi/icon.png \
+/Applications/MAMP/htdocs/iesa/platforms/android/ant-build/res/drawable-mdpi/icon.png \
+/Applications/MAMP/htdocs/iesa/platforms/android/ant-build/res/drawable-xhdpi/icon.png \
+/Applications/MAMP/htdocs/iesa/platforms/android/assets/_where-is-www.txt \
+/Applications/MAMP/htdocs/iesa/platforms/android/assets/www \
+/Applications/MAMP/htdocs/iesa/platforms/android/assets/www/cordova.js \
+/Applications/MAMP/htdocs/iesa/platforms/android/assets/www/cordova_plugins.js \
+/Applications/MAMP/htdocs/iesa/platforms/android/assets/www/css \
+/Applications/MAMP/htdocs/iesa/platforms/android/assets/www/img \
+/Applications/MAMP/htdocs/iesa/platforms/android/assets/www/index.html \
+/Applications/MAMP/htdocs/iesa/platforms/android/assets/www/js \
+/Applications/MAMP/htdocs/iesa/platforms/android/assets/www/css/index.css \
+/Applications/MAMP/htdocs/iesa/platforms/android/assets/www/img/logo.png \
+/Applications/MAMP/htdocs/iesa/platforms/android/assets/www/js/index.js \
+/Applications/MAMP/htdocs/iesa/platforms/android/ant-build/AndroidManifest.xml \
