@@ -66,7 +66,7 @@
             </div>
         </div>
 
-        <!-- CONTACTSAPI:4/7 -->
+        
         <div data-role="page" id="contacts" data-theme="b" >
             <div data-role="header" >
                 <a href="#" data-icon="back" data-rel="back" title="Go back">Back</a>
@@ -74,10 +74,7 @@
             </div>
             <div data-role="content">
                 <form>
-
-                    <!-- http://www.w3schools.com/jquerymobile/jquerymobile_list_views.asp -->
                     <ul data-role="listview" id='contactEmails' class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
-                        <!-- Dynamically content here -->
                     </ul>
                     <a href="#" id="saveContactButton" data-icon="check" title="Save Contact" data-role="button">Importer contacts</a>
                 </form>
@@ -87,7 +84,7 @@
             </div>
         </div>
         
-        <!-- CAMERAAPI:4/7 -->
+        
         <div data-role="page" id="camera" data-theme="b" >
             <div data-role="header" >
                 <a href="#" data-icon="back" data-rel="back" title="Go back">Back</a>
@@ -98,9 +95,9 @@
                     <a href="#" id="choosePictureAlbum" data-icon="camera" title="Choose a shot!" data-role="button">Choose a picture</a>
                     <fieldset data-role="controlgroup">
                         <a href="#" id="takePicture" data-icon="camera" title="Take a shot!" data-role="button">Take a shot!</a>
-                        <a href="#" id="savePicture" data-icon="check" title="Take a shot!" data-role="button">Save to Acuality</a>
                     </fieldset>
-                    <img id='shot' />
+                    <div id="flux">
+                    </div>
                 </form>
             </div>
             <div data-role="footer"  data-position="fixed">

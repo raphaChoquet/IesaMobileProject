@@ -19,8 +19,12 @@
     </feature>
     <feature name="Contacts">
         <param name="android-package" value="org.apache.cordova.contacts.ContactManager" />
+        <param name="ios-package" value="CDVContacts" />
+        <param name="android-package" value="org.apache.cordova.ContactManager" />
     </feature>
     <feature name="Camera">
         <param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
+        <param name="ios-package" value="CDVCamera" />
+        <param name="android-package" value="org.apache.cordova.CameraLauncher" />
     </feature>
 </widget>

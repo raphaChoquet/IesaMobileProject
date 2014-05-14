@@ -35,11 +35,7 @@ var app = {
 
 
 
-    // GEOLOC: << BEGIN
-    // onSuccess Callback
-    //   This method accepts a `Position` object, which contains
-    //   the current GPS coordinates
-    //
+    
     onSuccess: function(position) {
         var myLatlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
         if (myMarker) {
@@ -55,8 +51,6 @@ var app = {
         $('#geoloc').html('LAT: ' + position.coords.latitude + ' / LONG: ' + position.coords.longitude);
     },
 
-    // onError Callback receives a PositionError object
-    //
     onError: function(error) {
         alert('code: '    + error.code    + '\n' +
               'message: ' + error.message + '\n');
@@ -91,15 +85,9 @@ var app = {
             mapOptions);
 
         app.initmarkers(map);
-        // Options: throw an error if no update is received every 30 seconds.
-        //
 
         var watchID = navigator.geolocation.watchPosition(app.onSuccess, app.onError);
     },
-    // GEOLOC: << END
-
-
-    // CONTACTSAPI:6/7 << BEGIN
     loadContact: function() {
         
         var contactEmailElement = document.getElementById('contactEmails');
@@ -114,7 +102,9 @@ var app = {
         navigator.contacts.find(fields, this.onContactFindSuccess, this.onContactFindError, options);
     },
     saveContact: function() {
+        
         $('#contactEmails').children().each(function(){
+            
               var name = $(this).find('.nom').html();
               var surname = $(this).find('.prenom').html();
               var phone = $(this).find('.phone').html();
@@ -127,27 +117,27 @@ var app = {
               var test = navigator.contacts.find(fields, onContactFindSuccess, this.onContactFindError, options);
               
               function onContactFindSuccess(contact) {
-              
-              if($.isEmptyObject(contact)) {
-                  var contact = navigator.contacts.create();
-                  contact.displayName = surname;
-                  contact.nickname= surname;
-              
-                  var contactName = new ContactName();
-                  contactName.givenName = surname;
-                  contactName.familyName = name;
-                  contact.name = contactName;
-              
-                  var phoneNumbers = [];
-                  phoneNumbers[0] = new ContactField('work', phone, false);
-                  contact.phoneNumbers = phoneNumbers;
-              
-                  var emails = [];
-                  emails[0] = new ContactField('work', email, true);
-                  contact.emails = emails;
-              
-                  contact.save(this.onContactSaved, this.onContactSavedError);
-              }
+                
+                  if($.isEmptyObject(contact)) {
+                      var contact = navigator.contacts.create();
+                      contact.displayName = surname;
+                      contact.nickname= surname;
+                  
+                      var contactName = new ContactName();
+                      contactName.givenName = surname;
+                      contactName.familyName = name;
+                      contact.name = contactName;
+                  
+                      var phoneNumbers = [];
+                      phoneNumbers[0] = new ContactField('work', phone, false);
+                      contact.phoneNumbers = phoneNumbers;
+                  
+                      var emails = [];
+                      emails[0] = new ContactField('work', email, true);
+                      contact.emails = emails;
+                  
+                      contact.save(this.onContactSaved, this.onContactSavedError);
+                  }
               }
 
         });
@@ -167,10 +157,6 @@ var app = {
             var opt = document.createElement('li');
             opt.setAttribute('value', contact.displayName);
             opt.setAttribute('class', 'ui-li-static ui-body-inherit ui-last-child');
-            //if (contact.displayName) opt.innerHTML = opt.innerHTML + '#' + contact.displayName;
-            //if (contact.nickName) opt.innerHTML = opt.innerHTML + '#' + contact.nickName;
-            //if (contact.name.givenName) opt.innerHTML = opt.innerHTML + ' # ' + contact.name.givenName;
-            //if (contact.name.familyName) opt.innerHTML = opt.innerHTML + ' # ' + contact.name.familyName;
             var email = '';
             for (var j = 0; j < contact.emails.length; j++) {
                 email = contact.emails[j].value;
@@ -187,9 +173,6 @@ var app = {
     onContactFindError : function(contactError) {
         alert("onContactFindError :: " + contactError.code);
     },
-    // CONTACTSAPI:7/7 << END
-
-    // CAMERAAPI:6/6 << BEGIN
     cameraOptions: {
         targetWidth: 300,
         targetHeight: 400,
@@ -205,7 +188,6 @@ var app = {
         document.querySelector('#shot').src = imageData;
     },
     onCameraError: function(error){
-        //navigator.notification.alert(error, null);
         alert("onCameraError (maybe on Simulator: camera disabled!) :: " + error.code);
     },
     updatePreferences: function(evt){
@@ -213,11 +195,7 @@ var app = {
         app.cameraOptions[evt.target.id] = evt.target.checked;
     },
     onChoosePictureURISuccess: function(imageURI) {
-        // Uncomment to view the image file URI
-        // console.log(imageURI);
-        var image = document.querySelector('#shot');
-        image.style.display = 'block';
-        image.src = imageURI;
+        $('#flux').append('<img src="' + imageURI + '" />').append(prompt("Saisissez votre texte (optionnel) :"));
     },
     onChoosePictureError: function(error){
         alert("onChoosePictureError :: " + error.code);
@@ -228,13 +206,9 @@ var app = {
                                     destinationType: Camera.DestinationType.FILE_URI,
                                     sourceType: source });
     },
-    choosePictureLibrary: function(e) {
+    choosePictureAlbum: function(e) {
         app.choosePicture(Camera.PictureSourceType.PHOTOLIBRARY);
     },
-    choosePictureAlbum: function(e) {
-        app.choosePicture(Camera.PictureSourceType.SAVEDPHOTOALBUM);
-    },
-    // CAMERAAPI:6/6 << END
 
     // deviceready Event Handler
     //
@@ -253,23 +227,15 @@ var app = {
             alert('mapCreate');
         });
 
-        // CONTACTSAPI:5/7
-       /* var loadContactButton = document.getElementById('loadContactButton');
-        loadContactButton.addEventListener('click', function(event) { app.loadContact(event); }, true);*/
         var saveContactButton = document.getElementById('saveContactButton');
         saveContactButton.addEventListener('click', function(event) { app.saveContact(event); }, true);
         
-        // CAMERAAPI:5/6
         var takePictureButton = document.getElementById('takePicture');
         takePictureButton.addEventListener('click', function(event) { app.takePicture(event); }, true);
-        var saveToPhotoAlbum = document.querySelector('#saveToPhotoAlbum');
-        saveToPhotoAlbum.addEventListener('change', app.updatePreferences);
-        var allowEdit = document.querySelector('#allowEdit');
-        allowEdit.addEventListener('change', app.updatePreferences);
+
         var choosePictureAlbum = document.getElementById('choosePictureAlbum');
+
         choosePictureAlbum.addEventListener('click', function(event) { app.choosePictureAlbum(event); }, true);
-        var choosePictureLibrary = document.getElementById('choosePictureLibrary');
-        choosePictureLibrary.addEventListener('click', function(event) { app.choosePictureLibrary(event); }, true);
         
 
         app.receivedEvent('deviceready');
