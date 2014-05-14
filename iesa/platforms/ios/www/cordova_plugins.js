@@ -1,31 +1,38 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
 module.exports = [
     {
-        "file": "plugins/org.apache.cordova.geolocation/www/Coordinates.js",
-        "id": "org.apache.cordova.geolocation.Coordinates",
+        "file": "plugins/com.danielcwilson.plugins.googleanalytics/www/analytics.js",
+        "id": "com.danielcwilson.plugins.googleanalytics.UniversalAnalytics",
         "clobbers": [
-            "Coordinates"
+            "analytics"
         ]
     },
     {
-        "file": "plugins/org.apache.cordova.geolocation/www/PositionError.js",
-        "id": "org.apache.cordova.geolocation.PositionError",
+        "file": "plugins/org.apache.cordova.camera/www/CameraConstants.js",
+        "id": "org.apache.cordova.camera.Camera",
         "clobbers": [
-            "PositionError"
+            "Camera"
         ]
     },
     {
-        "file": "plugins/org.apache.cordova.geolocation/www/Position.js",
-        "id": "org.apache.cordova.geolocation.Position",
+        "file": "plugins/org.apache.cordova.camera/www/CameraPopoverOptions.js",
+        "id": "org.apache.cordova.camera.CameraPopoverOptions",
         "clobbers": [
-            "Position"
+            "CameraPopoverOptions"
         ]
     },
     {
-        "file": "plugins/org.apache.cordova.geolocation/www/geolocation.js",
-        "id": "org.apache.cordova.geolocation.geolocation",
+        "file": "plugins/org.apache.cordova.camera/www/Camera.js",
+        "id": "org.apache.cordova.camera.camera",
         "clobbers": [
-            "navigator.geolocation"
+            "navigator.camera"
+        ]
+    },
+    {
+        "file": "plugins/org.apache.cordova.camera/www/ios/CameraPopoverHandle.js",
+        "id": "org.apache.cordova.camera.CameraPopoverHandle",
+        "clobbers": [
+            "CameraPopoverHandle"
         ]
     },
     {
@@ -106,31 +113,31 @@ module.exports = [
         ]
     },
     {
-        "file": "plugins/org.apache.cordova.camera/www/CameraConstants.js",
-        "id": "org.apache.cordova.camera.Camera",
+        "file": "plugins/org.apache.cordova.geolocation/www/Coordinates.js",
+        "id": "org.apache.cordova.geolocation.Coordinates",
         "clobbers": [
-            "Camera"
+            "Coordinates"
         ]
     },
     {
-        "file": "plugins/org.apache.cordova.camera/www/CameraPopoverOptions.js",
-        "id": "org.apache.cordova.camera.CameraPopoverOptions",
+        "file": "plugins/org.apache.cordova.geolocation/www/PositionError.js",
+        "id": "org.apache.cordova.geolocation.PositionError",
         "clobbers": [
-            "CameraPopoverOptions"
+            "PositionError"
         ]
     },
     {
-        "file": "plugins/org.apache.cordova.camera/www/Camera.js",
-        "id": "org.apache.cordova.camera.camera",
+        "file": "plugins/org.apache.cordova.geolocation/www/Position.js",
+        "id": "org.apache.cordova.geolocation.Position",
         "clobbers": [
-            "navigator.camera"
+            "Position"
         ]
     },
     {
-        "file": "plugins/org.apache.cordova.camera/www/ios/CameraPopoverHandle.js",
-        "id": "org.apache.cordova.camera.CameraPopoverHandle",
+        "file": "plugins/org.apache.cordova.geolocation/www/geolocation.js",
+        "id": "org.apache.cordova.geolocation.geolocation",
         "clobbers": [
-            "CameraPopoverHandle"
+            "navigator.geolocation"
         ]
     },
     {
@@ -151,9 +158,10 @@ module.exports = [
 module.exports.metadata = 
 // TOP OF METADATA
 {
-    "org.apache.cordova.geolocation": "0.3.7",
-    "org.apache.cordova.contacts": "0.2.10",
+    "com.danielcwilson.plugins.googleanalytics": "0.4.1",
     "org.apache.cordova.camera": "0.2.9",
+    "org.apache.cordova.contacts": "0.2.10",
+    "org.apache.cordova.geolocation": "0.3.7",
     "org.apache.cordova.globalization": "0.2.7"
 }
 // BOTTOM OF METADATA

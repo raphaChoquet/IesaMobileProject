@@ -31,6 +31,14 @@
                         {
                             "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
                             "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.INTERNET\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
+                            "count": 1
                         }
                     ]
                 }
@@ -49,6 +57,10 @@
                         {
                             "xml": "<feature name=\"Globalization\"><param name=\"android-package\" value=\"org.apache.cordova.globalization.Globalization\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"UniversalAnalytics\"><param name=\"android-package\" value=\"com.danielcwilson.plugins.analytics.UniversalAnalyticsPlugin\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -66,6 +78,9 @@
             "PACKAGE_NAME": "fr.overwhite.iesa"
         },
         "org.apache.cordova.globalization": {
+            "PACKAGE_NAME": "fr.overwhite.iesa"
+        },
+        "com.danielcwilson.plugins.googleanalytics": {
             "PACKAGE_NAME": "fr.overwhite.iesa"
         }
     },
