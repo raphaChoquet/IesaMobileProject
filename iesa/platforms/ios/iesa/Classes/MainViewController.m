@@ -67,21 +67,9 @@
 {
     // View defaults to full size.  If you want to customize the view's size, or its subviews (e.g. webView),
     // you can do so here.
-    
-    [super viewWillAppear:animated];
-    // View defaults to full size.  If you want to customize the view's size, or its subviews (e.g. webView),
-    // you can do so here.
-    //Lower screen 20px ios 7
-    BOOL isIOS7 = [[[UIDevice currentDevice] systemVersion]floatValue] >=7;
-    BOOL isStatusBarVisible = ! [UIApplication sharedApplication].statusBarHidden;
-    if (isIOS7 && isStatusBarVisible){
-        CGRect viewBounds = [self.webView bounds];
-        viewBounds.origin.y = 20;
-        viewBounds.size.height =viewBounds.size.height -20;
-        self.webView.frame = viewBounds;
-    }
-}
 
+    [super viewWillAppear:animated];
+}
 
 - (void)viewDidLoad
 {
