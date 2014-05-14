@@ -46,6 +46,7 @@
 		BF721A243454420CBE0F66B0 /* CDVCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4895DC9826460E859E5E2E /* CDVCamera.m */; };
 		EF952A055A63421F828126A5 /* CDVJpegHeaderWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = FFAD2287E55E4C6AAE7A11C9 /* CDVJpegHeaderWriter.m */; };
 		29868709D41C4AD5BD97DA5D /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F53B4E21C63427BAEF285E4 /* ImageIO.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		0BA2F0FA38264739AFD4F5A5 /* CDVGlobalization.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E6FB5CCC1949F597D4B26C /* CDVGlobalization.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,6 +125,8 @@
 		1F9A280170794EF0AD8FB499 /* CDVJpegHeaderWriter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVJpegHeaderWriter.h"; path = "org.apache.cordova.camera/CDVJpegHeaderWriter.h"; sourceTree = "<group>"; fileEncoding = 4; };
 		3B3D9F1567AD4484A62ADEA5 /* CDVExif.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVExif.h"; path = "org.apache.cordova.camera/CDVExif.h"; sourceTree = "<group>"; fileEncoding = 4; };
 		4F53B4E21C63427BAEF285E4 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "ImageIO.framework"; path = "System/Library/Frameworks/ImageIO.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
+		38E6FB5CCC1949F597D4B26C /* CDVGlobalization.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVGlobalization.m"; path = "org.apache.cordova.globalization/CDVGlobalization.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		E327048C118843A7AAD572FB /* CDVGlobalization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVGlobalization.h"; path = "org.apache.cordova.globalization/CDVGlobalization.h"; sourceTree = "<group>"; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -261,6 +264,8 @@
 				A709FFA398084158AEB1D499 /* CDVCamera.h */,
 				1F9A280170794EF0AD8FB499 /* CDVJpegHeaderWriter.h */,
 				3B3D9F1567AD4484A62ADEA5 /* CDVExif.h */,
+				38E6FB5CCC1949F597D4B26C /* CDVGlobalization.m */,
+				E327048C118843A7AAD572FB /* CDVGlobalization.h */,
 			);
 			name = Plugins;
 			path = iesa/Plugins;
@@ -460,6 +465,7 @@
 				3AA2CE8E7D2D4E38A2434755 /* CDVContact.m in Sources */,
 				BF721A243454420CBE0F66B0 /* CDVCamera.m in Sources */,
 				EF952A055A63421F828126A5 /* CDVJpegHeaderWriter.m in Sources */,
+				0BA2F0FA38264739AFD4F5A5 /* CDVGlobalization.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

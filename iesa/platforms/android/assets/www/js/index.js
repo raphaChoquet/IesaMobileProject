@@ -34,6 +34,28 @@ var app = {
 
 
 
+    // GLObalization
+
+    i18nInit: function(lang) {
+        jQuery.i18n.properties({
+            name: 'Messages', 
+            path: 'lang/', 
+            mode: 'map',
+            language: lang, 
+            callback: function() {
+                // We specified mode: 'both' so translated values will be
+                // available as JS vars/functions and as a map
+
+                // Accessing a simple value through the map
+                $.i18n.prop('msg_hello');
+
+                // Accessing a simple value through a JS variable
+                alert($.i18n.prop('msg_hello'));
+            }
+        });       
+
+    },
+
 
     // GEOLOC: << BEGIN
     // onSuccess Callback
@@ -267,7 +289,17 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        
+
+        navigator.globalization.getPreferredLanguage(
+            function (language) {
+                alert(language.value);
+                app.i18nInit(language.value);
+                $('#select-language option[value="' + language.value + '"]').prop('selected', true);
+                $('#select-language').selectmenu('refresh');
+            },
+            function () {alert('Error getting language\n');}
+        );
+
         $.getJSON( "contacts.json", function( data ) {
                   $.each(data.contacts, function(key, val){
                          $('#contactEmails').prepend('<li><div class="pull-left"><input type="checkbox"></div><div><span class="nom">' + val.nom + '</span> <span class="prenom">' + val.prenom + '</span></div><div><span class="fonction">' + val.fonction + '</span></div><div><span class="email">' + val.email + '</span></div><div><span class="phone">' + val.phone + '</span></div></li>');
@@ -275,6 +307,10 @@ var app = {
         });
         
         $("#map").on('pagecreate', app.initializeMap);
+        $("#select-language").change(function() {
+            alert($(this).val());
+            app.i18nInit($(this).val());
+        });
         
 
         // CONTACTSAPI:5/7

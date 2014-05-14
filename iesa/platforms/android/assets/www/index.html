@@ -31,6 +31,7 @@
         <script src="js/vendor/jquery-1.11.0.min.js"></script>
         <script src="js/vendor/jquery.mobile-1.4.2.min.js"></script>
         <!-- link rel="stylesheet" href="http://demos.jquerymobile.com/1.4.0/them-classic/theme-classic.css" / -->
+        <script src="js/vendor/jquery.i18n.properties-min-1.0.9.js"></script>
         <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKk3HrNjUwg42_IIxbjfjBeEtc35N0BVg&sensor=true">
         </script>
@@ -47,6 +48,7 @@
                 <p><a href="#map" data-role="button" data-transition="slide">MAP</a></p>
                 <p><a href="#contacts" data-role="button" data-transition="slide">Contacts</a></p>
                 <p><a href="#camera" data-role="button" data-transition="slide">Camera</a></p><!-- Navigation button's href points to other page -->
+                <p><a href="#parameter" data-role="button" data-transition="slide">Parameter</a></p>
             </div>
 
             <!-- MULTIVIEW:2/5 -->
@@ -101,6 +103,28 @@
                         <a href="#" id="savePicture" data-icon="check" title="Take a shot!" data-role="button">Save to Acuality</a>
                     </fieldset>
                     <img id='shot' />
+                </form>
+            </div>
+            <div data-role="footer"  data-position="fixed">
+                <h4>Le site de l'<a href="http://www.iesa.fr/">IESA</a></h4>
+            </div>
+        </div>
+
+         <!-- PARAMETER:4/7 -->
+        <div data-role="page" id="parameter" data-theme="b" >
+            <div data-role="header" >
+                <a href="#" data-icon="back" data-rel="back" title="Go back">Back</a>
+                <h1>Parameter</h1>
+            </div>
+            <div data-role="content">
+                <form>
+                    <div data-role="fieldcontain">
+                        <label for="select-language">Language :</label>
+                        <select name="select-language" id="select-language">
+                            <option value="fr">fr</option>
+                            <option value="en">en</option>
+                        </select>
+                    </div>
                 </form>
             </div>
             <div data-role="footer"  data-position="fixed">

@@ -34,16 +34,14 @@
     </feature>
     <feature name="Contacts">
         <param name="ios-package" value="CDVContacts" />
-<<<<<<< HEAD
         <param name="android-package" value="org.apache.cordova.ContactManager" />
     </feature>
     <feature name="Camera">
         <param name="ios-package" value="CDVCamera" />
         <param name="android-package" value="org.apache.cordova.CameraLauncher" />
-=======
     </feature>
-    <feature name="Camera">
-        <param name="ios-package" value="CDVCamera" />
->>>>>>> b67c1780db5ef08f1aff3ad9f5759310b9d3c9dc
+    <feature name="Globalization">
+        <param name="ios-package" value="CDVGlobalization" />
+        <param name="android-package" value="org.apache.cordova.globalization.Globalization" />
     </feature>
 </widget>

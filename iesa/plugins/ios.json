@@ -19,6 +19,10 @@
                         {
                             "xml": "<feature name=\"Camera\"><param name=\"ios-package\" value=\"CDVCamera\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Globalization\"><param name=\"ios-package\" value=\"CDVGlobalization\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -79,6 +83,9 @@
             "PACKAGE_NAME": "fr.overwhite.iesa"
         },
         "org.apache.cordova.camera": {
+            "PACKAGE_NAME": "fr.overwhite.iesa"
+        },
+        "org.apache.cordova.globalization": {
             "PACKAGE_NAME": "fr.overwhite.iesa"
         }
     },
