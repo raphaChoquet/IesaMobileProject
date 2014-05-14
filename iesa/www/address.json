@@ -1,7 +1,7 @@
 [
 	{
 		"name": "IESA multimédia", 
-		"address" : "5 rue Saint-Augustin 75002 Paris",
+		"address" : "5 rue Saint-Augustin<br>75002 Paris",
 		"lat" : "48.8689041",
 		"long" : "2.337638",
 		"phone" : "01 42 86 57 06"
@@ -9,7 +9,7 @@
 
 	{
 		"name": "IESA arts et culture", 
-		"address" : "5 avenvue de l'Opéra 75001 Paris",
+		"address" : "5 avenvue de l'Opéra<br>75001 Paris",
 		"lat" : "48.8646926",
 		"long" : "2.3345815",
 		"phone" : "01 42 86 57 01"
@@ -17,7 +17,7 @@
 
 	{
 		"name": "IESA bastille (IICP)", 
-		"address" : "6, rue Froment 75011 Paris",
+		"address" : "6, rue Froment<br>75011 Paris",
 		"lat" : "48.8569693",
 		"long" : "2.3732377",
 		"phone" : "01 55 28 82 82"

@@ -114,3 +114,15 @@ h1 {
     -webkit-animation:fade 3000ms infinite;
 }
 
+.marker p{
+    color: black;
+}
+
+.marker-name{
+    font-weight: bold;
+}
+
+.marker-address {
+    text-transform: none;
+}
+

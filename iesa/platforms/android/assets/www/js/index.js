@@ -57,18 +57,44 @@ var app = {
     },
 
     initmarkers: function(map) {
+        var icon = {
+            origin : new google.maps.Point(0,0),
+            size : new google.maps.Size(24,24),
+            url : 'img/logo-iesa.png',
+            anchor : new google.maps.Point(20,20)
+        };
         $.getJSON("address.json", function (address) {
-            alert(address[0]['name']);
             var markers = [];
+            var infos = [];
             for (var i = 0; i < address.length; i++) {
                 var myLatlng = new google.maps.LatLng(address[i].lat, address[i].long);
                 var marker = new google.maps.Marker({
                     position: myLatlng,
                     map: map,
-                    title: address[i].name
+                    title: address[i].name,
+                    icon: icon
                 });
 
                 markers.push(marker);
+
+                var infoWindow = new google.maps.InfoWindow({
+                    content : '<div class="marker">' +
+                        '<p class="marker-name">' + address[i].name + '</p>' +
+                        '<p class="marker-address">' + address[i].address + '</p>' +
+                        '<p class="marker-phone">' + address[i].phone + '</p>' +
+                    '</div>',
+                    maxWidth : 150,
+                    pixelOffset : 0,
+                    position : myLatlng
+                });
+
+                infos.push(infoWindow);
+
+                google.maps.event.addListener(markers[i], 'click', (function (j) {
+                    return function () {
+                        infos[j].open(map, markers[j]);
+                    };
+                })(i));
             }
         });
     },
@@ -223,9 +249,7 @@ var app = {
         });
         
         $("#map").on('pagecreate', app.initializeMap);
-        $("#map").on('pagecreate', function () {
-            alert('mapCreate');
-        });
+        
 
         var saveContactButton = document.getElementById('saveContactButton');
         saveContactButton.addEventListener('click', function(event) { app.saveContact(event); }, true);

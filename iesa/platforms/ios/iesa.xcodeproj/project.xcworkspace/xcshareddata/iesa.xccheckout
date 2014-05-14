@@ -5,19 +5,31 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
+<<<<<<< HEAD
 	<string>4A812E73-AC4E-498A-9901-7BE2E7BED728</string>
+=======
+	<string>5A615AC7-25CE-4F40-BA81-D12FC20CAE15</string>
+>>>>>>> ceeaf79b4f5f19bacb268dd518fe8479ae232c8a
 	<key>IDESourceControlProjectName</key>
 	<string>iesa</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+<<<<<<< HEAD
 		<key>B78D80FE-942B-4BB7-B768-8B8C2B118678</key>
+=======
+		<key>652B6748-4A58-451D-B46F-4C6D3981AFB8</key>
+>>>>>>> ceeaf79b4f5f19bacb268dd518fe8479ae232c8a
 		<string>https://github.com/raphaChoquet/IesaMobileProject.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>iesa/platforms/ios/iesa.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+<<<<<<< HEAD
 		<key>B78D80FE-942B-4BB7-B768-8B8C2B118678</key>
+=======
+		<key>652B6748-4A58-451D-B46F-4C6D3981AFB8</key>
+>>>>>>> ceeaf79b4f5f19bacb268dd518fe8479ae232c8a
 		<string>../../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
@@ -25,14 +37,22 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
+<<<<<<< HEAD
 	<string>B78D80FE-942B-4BB7-B768-8B8C2B118678</string>
+=======
+	<string>652B6748-4A58-451D-B46F-4C6D3981AFB8</string>
+>>>>>>> ceeaf79b4f5f19bacb268dd518fe8479ae232c8a
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
+<<<<<<< HEAD
 			<string>B78D80FE-942B-4BB7-B768-8B8C2B118678</string>
+=======
+			<string>652B6748-4A58-451D-B46F-4C6D3981AFB8</string>
+>>>>>>> ceeaf79b4f5f19bacb268dd518fe8479ae232c8a
 			<key>IDESourceControlWCCName</key>
 			<string>IesaMobileProject</string>
 		</dict>
