@@ -18,7 +18,7 @@
  */
 var map;
 var myMarker;
-var baseUrlJson = 'http://37.187.2.1/appli/'
+var baseUrlJson = 'http://37.187.2.11/appli/'
 
 var app = {
     // Application Constructor
