@@ -123,7 +123,6 @@ var app = {
 
 
     initializeMap: function () {
-        alert('init map');
         $('#map-canvas').height($(window).height()-$('#header').height()-$('#map-canvas').parent().outerHeight()-90);
         var mapOptions = {
           center: new google.maps.LatLng(48.8689041, 2.337638),
@@ -152,7 +151,6 @@ var app = {
 
     saveContact: function(evt) {
         evt.preventDefault();
-        alert('contacts');
         $('#contactEmails').children().each(function(){
             
               var name = $(this).find('.nom').html();
@@ -191,7 +189,6 @@ var app = {
               }
 
         });
-        alert('Contact non existant importé');
     },
     onContactSavedError : function(error) {
         alert("onContactSavedError :: " + error.code);
@@ -229,9 +226,11 @@ var app = {
 
     onCameraSuccess: function (imageData) {
         var d = new Date();
+        var msg = prompt("Saisissez votre texte (optionnel) :");
+        //<span class="img-date">' + d.getDate(); + '/' + d.getMonth() + '/' + d.getFullYear() + '</span>
         var img = '<figure class="img-projet">' +
-            '<img src="' + imageData+ '"">' +
-            '<figcaption><span class="img-date">' + d.getDate(); + '/' + d.getMonth() + '/' + d.getFullYear() + '</span><p>' + prompt("Saisissez votre texte (optionnel) :") + '</p></figcaption>' +
+            '<img src="' + imageData + '"">' +
+            '<figcaption><p>' + msg + '</p></figcaption>' +
         '</figure>';
 
         $('#flux').prepend(img);
@@ -254,8 +253,7 @@ var app = {
         navigator.camera.getPicture(app.onCameraSuccess, app.onCameraFail, cameraOptions);
     },
 
-    choosePicture: function(source) {
-        alert('choose');
+    choosePicture: function (source) {
         var chooseOptions = {
             quality: 50,
             destinationType: Camera.DestinationType.FILE_URI,
@@ -264,12 +262,15 @@ var app = {
         navigator.camera.getPicture(app.onCameraSuccess, app.onCameraFail, chooseOptions);
     },
 
-    choosePictureAlbum: function(evt) {
+    choosePictureAlbum: function (evt) {
         evt.preventDefault();
-        alert('click');
         app.choosePicture(Camera.PictureSourceType.PHOTOLIBRARY);
     },
 
+    analytics: function () {
+        analytics.startTrackerWithId('UA-50987453-1');
+        analytics.trackView('Home');
+    },
 
     contacts: function () {
         $.getJSON( baseUrlJson + "contacts.json", function( data ) {
@@ -289,15 +290,13 @@ var app = {
         var choosePictureAlbum = document.getElementById('choosePictureAlbum');
         choosePictureAlbum.addEventListener('click', app.choosePictureAlbum, true);
     },
+
     // deviceready Event Handler
     //
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        // analytics.startTrackerWithId('UA-50987453-1');
-        // analytics.trackView('Home');
 
-        // console.log('hello');
         // navigator.globalization.getPreferredLanguage(
         //     function (language) {
         //         alert(language.value);
@@ -307,20 +306,16 @@ var app = {
         //     },
         //     function () {alert('Error getting language\n');}
         // );
-
-        // $.getJSON( baseUrlJson + "contacts.json", function( data ) {
-        //           $.each(data.contacts, function(key, val){
-        //                  $('#contactEmails').prepend('<li><div><span class="nom">' + val.nom + '</span> <span class="prenom">' + val.prenom + '</span></div><div><span class="fonction">' + val.fonction + '</span></div><div><span class="email">' + val.email + '</span></div><div><span class="phone">' + val.phone + '</span></div></li>');
-        //            });
-        // });
         
-        // $("#map").on('pagecreate', app.initializeMap);
         // $("#select-language").change(function() {
         //     alert($(this).val());
         //     app.i18nInit($(this).val());
         // });
 
         app.contacts();
-        app.camera();        
+        app.camera();   
+        app.analytics();
+
+        $("#map").on('pagecreate', app.initializeMap);     
     }
 };
