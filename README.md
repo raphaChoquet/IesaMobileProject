@@ -10,8 +10,16 @@ Mettre en place une boucle de feedback
 Installation
 ============
 
-Ajout des permissions dans le manifest Android
 
+Cloner le repository github
+
+Lancer les commandes :
+```
+cordova platform add ios
+cordova platform add android
+``` 
+
+Ajout des permissions dans le manifest Android
 
 ```
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -24,6 +32,10 @@ Ajout des permissions dans le manifest Android
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 ```
 
+Lancer la commande 
+```
+cordova preprare
+```
 
 BOUCLE de Feedback
 ==================
