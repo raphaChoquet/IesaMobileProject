@@ -18,6 +18,7 @@
  */
 var map;
 var myMarker;
+var baseUrlJson = 'http://37.187.2.11/appli/'
 
 var destinationType;
 
@@ -87,7 +88,7 @@ var app = {
             url : 'img/logo-iesa.png',
             anchor : new google.maps.Point(20,20)
         };
-        $.getJSON("address.json", function (address) {
+        $.getJSON(baseUrlJson + "address.json", function (address) {
             var markers = [];
             var infos = [];
             for (var i = 0; i < address.length; i++) {
@@ -265,6 +266,8 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
+        analytics.startTrackerWithId('UA-50987453-1');
+        analytics.trackView('Home');
 
         console.log('hello');
         navigator.globalization.getPreferredLanguage(
@@ -277,9 +280,9 @@ var app = {
             function () {alert('Error getting language\n');}
         );
 
-        $.getJSON( "contacts.json", function( data ) {
+        $.getJSON( baseUrlJson + "contacts.json", function( data ) {
                   $.each(data.contacts, function(key, val){
-                         $('#contactEmails').prepend('<li><div class="pull-left"><input type="checkbox"></div><div><span class="nom">' + val.nom + '</span> <span class="prenom">' + val.prenom + '</span></div><div><span class="fonction">' + val.fonction + '</span></div><div><span class="email">' + val.email + '</span></div><div><span class="phone">' + val.phone + '</span></div></li>');
+                         $('#contactEmails').prepend('<li><div><span class="nom">' + val.nom + '</span> <span class="prenom">' + val.prenom + '</span></div><div><span class="fonction">' + val.fonction + '</span></div><div><span class="email">' + val.email + '</span></div><div><span class="phone">' + val.phone + '</span></div></li>');
                    });
         });
         
