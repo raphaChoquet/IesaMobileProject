@@ -19,6 +19,8 @@
 var map;
 var myMarker;
 
+var destinationType;
+
 var app = {
     // Application Constructor
     initialize: function() {
@@ -221,15 +223,17 @@ var app = {
     onContactFindError : function(contactError) {
         alert("onContactFindError :: " + contactError.code);
     },
-    cameraOptions: {
-        targetWidth: 300,
-        targetHeight: 400,
-        saveToPhotoAlbum: true,
-        allowEdit: true
-    },
     takePicture: function(evt) {
         evt.preventDefault();
-        navigator.camera.getPicture(this.onCameraSuccess, this.onCameraError, this.cameraOptions);
+        var cameraOptions = {
+            targetWidth: 300,
+            targetHeight: 400,
+            quality: 50,
+            saveToPhotoAlbum: true,
+            destinationType: destinationType.DATA_URL,
+            allowEdit: true
+        };
+        navigator.camera.getPicture(this.onCameraSuccess, this.onCameraError, cameraOptions);
     },
     onCameraSuccess: function(imageData){
         alert("onCameraSuccess");
@@ -238,10 +242,6 @@ var app = {
     onCameraError: function(error){
         alert("onCameraError (maybe on Simulator: camera disabled!) :: " + error.code);
     },
-    updatePreferences: function(evt){
-        evt.preventDefault();
-        app.cameraOptions[evt.target.id] = evt.target.checked;
-    },
     onChoosePictureURISuccess: function(imageURI) {
         $('#flux').append('<img src="' + imageURI + '" />').append(prompt("Saisissez votre texte (optionnel) :"));
     },
@@ -249,10 +249,12 @@ var app = {
         alert("onChoosePictureError :: " + error.code);
     },
     choosePicture: function(source) {
-        navigator.camera.getPicture(this.onChoosePictureURISuccess, this.onChoosePictureError,
-                                    { quality: 50,
-                                    destinationType: Camera.DestinationType.FILE_URI,
-                                    sourceType: source });
+        var chooseOptions = {
+            quality: 50,
+            destinationType: destinationType.FILE_URI,
+            sourceType: source 
+        };
+        navigator.camera.getPicture(this.onChoosePictureURISuccess, this.onChoosePictureError, chooseOptions);
     },
     choosePictureAlbum: function(e) {
         app.choosePicture(Camera.PictureSourceType.PHOTOLIBRARY);
@@ -264,6 +266,7 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
 
+        console.log('hello');
         navigator.globalization.getPreferredLanguage(
             function (language) {
                 alert(language.value);
@@ -286,6 +289,8 @@ var app = {
             app.i18nInit($(this).val());
         });
         
+
+        destinationType = navigator.camera.DestinationType;
 
         var saveContactButton = document.getElementById('saveContactButton');
         saveContactButton.addEventListener('click', function(event) { app.saveContact(event); }, true);
