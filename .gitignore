@@ -3,3 +3,7 @@ platforms/android/
 
 #ios
 platforms/ios/
+
+
+plugins/*
+!plugins/.gitkeep

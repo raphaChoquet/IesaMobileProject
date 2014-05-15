@@ -19,17 +19,14 @@ cordova platform add ios
 cordova platform add android
 ``` 
 
-Ajout des permissions dans le manifest Android
+Ajout des plugins :
 
 ```
-<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-<uses-permission android:name="android.permission.READ_CONTACTS" />
-<uses-permission android:name="android.permission.WRITE_CONTACTS" />
-<uses-permission android:name="android.permission.GET_ACCOUNTS" />
-<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+cordova plugin add org.apache.cordova.camera
+cordova plugin add org.apache.cordova.contacts
+cordova plugin add org.apache.cordova.geolocation
+cordova plugin add org.apache.cordova.globalization
+cordova plugin add com.danielcwilson.plugins.googleanalytics
 ```
 
 Lancer la commande 
