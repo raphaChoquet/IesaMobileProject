@@ -18,6 +18,7 @@
  */
 var map;
 var myMarker;
+var baseUrlJson = 'http://37.187.2.1/appli/'
 
 var app = {
     // Application Constructor
@@ -85,7 +86,7 @@ var app = {
             url : 'img/logo-iesa.png',
             anchor : new google.maps.Point(20,20)
         };
-        $.getJSON("address.json", function (address) {
+        $.getJSON(baseUrlJson + "address.json", function (address) {
             var markers = [];
             var infos = [];
             for (var i = 0; i < address.length; i++) {
@@ -276,7 +277,7 @@ var app = {
             function () {alert('Error getting language\n');}
         );
 
-        $.getJSON( "contacts.json", function( data ) {
+        $.getJSON( baseUrlJson + "contacts.json", function( data ) {
                   $.each(data.contacts, function(key, val){
                          $('#contactEmails').prepend('<li><div><span class="nom">' + val.nom + '</span> <span class="prenom">' + val.prenom + '</span></div><div><span class="fonction">' + val.fonction + '</span></div><div><span class="email">' + val.email + '</span></div><div><span class="phone">' + val.phone + '</span></div></li>');
                    });
