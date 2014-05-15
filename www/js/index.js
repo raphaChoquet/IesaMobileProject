@@ -19,9 +19,6 @@
 var map;
 var myMarker;
 var baseUrlJson = 'http://37.187.2.11/appli/'
-
-var destinationType;
-
 var app = {
     // Application Constructor
     initialize: function() {
@@ -224,40 +221,42 @@ var app = {
     onContactFindError : function(contactError) {
         alert("onContactFindError :: " + contactError.code);
     },
-    takePicture: function(evt) {
+
+
+    //CAMERA
+
+    onCameraSuccess: function (imageData) {
+        $('#flux').append('<img src="' + imageURI + '" />').append(prompt("Saisissez votre texte (optionnel) :"));
+    },
+
+    onCameraFail: function (error) {
+        alert('Error Camera : ' + error.code);
+    },
+
+    takePicture: function (evt) {
         evt.preventDefault();
         var cameraOptions = {
             targetWidth: 300,
             targetHeight: 400,
             quality: 50,
             saveToPhotoAlbum: true,
-            destinationType: destinationType.DATA_URL,
             allowEdit: true
         };
-        navigator.camera.getPicture(this.onCameraSuccess, this.onCameraError, cameraOptions);
+
+        navigator.camera.getPicture(app.onCameraSuccess, app.onCameraFail, cameraOptions);
     },
-    onCameraSuccess: function(imageData){
-        alert("onCameraSuccess");
-        document.querySelector('#shot').src = imageData;
-    },
-    onCameraError: function(error){
-        alert("onCameraError (maybe on Simulator: camera disabled!) :: " + error.code);
-    },
-    onChoosePictureURISuccess: function(imageURI) {
-        $('#flux').append('<img src="' + imageURI + '" />').append(prompt("Saisissez votre texte (optionnel) :"));
-    },
-    onChoosePictureError: function(error){
-        alert("onChoosePictureError :: " + error.code);
-    },
+
     choosePicture: function(source) {
         var chooseOptions = {
             quality: 50,
             destinationType: destinationType.FILE_URI,
             sourceType: source 
         };
-        navigator.camera.getPicture(this.onChoosePictureURISuccess, this.onChoosePictureError, chooseOptions);
+        navigator.camera.getPicture(app.onCameraSuccess, app.onCameraFail, chooseOptions);
     },
-    choosePictureAlbum: function(e) {
+
+    choosePictureAlbum: function(evt) {
+        evt.preventDefault();
         app.choosePicture(Camera.PictureSourceType.PHOTOLIBRARY);
     },
 
@@ -266,62 +265,40 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        analytics.startTrackerWithId('UA-50987453-1');
-        analytics.trackView('Home');
+        // analytics.startTrackerWithId('UA-50987453-1');
+        // analytics.trackView('Home');
 
-        console.log('hello');
-        navigator.globalization.getPreferredLanguage(
-            function (language) {
-                alert(language.value);
-                app.i18nInit(language.value);
-                $('#select-language option[value="' + language.value + '"]').prop('selected', true);
-                $('#select-language').selectmenu('refresh');
-            },
-            function () {alert('Error getting language\n');}
-        );
+        // console.log('hello');
+        // navigator.globalization.getPreferredLanguage(
+        //     function (language) {
+        //         alert(language.value);
+        //         app.i18nInit(language.value);
+        //         $('#select-language option[value="' + language.value + '"]').prop('selected', true);
+        //         $('#select-language').selectmenu('refresh');
+        //     },
+        //     function () {alert('Error getting language\n');}
+        // );
 
-        $.getJSON( baseUrlJson + "contacts.json", function( data ) {
-                  $.each(data.contacts, function(key, val){
-                         $('#contactEmails').prepend('<li><div><span class="nom">' + val.nom + '</span> <span class="prenom">' + val.prenom + '</span></div><div><span class="fonction">' + val.fonction + '</span></div><div><span class="email">' + val.email + '</span></div><div><span class="phone">' + val.phone + '</span></div></li>');
-                   });
-        });
+        // $.getJSON( baseUrlJson + "contacts.json", function( data ) {
+        //           $.each(data.contacts, function(key, val){
+        //                  $('#contactEmails').prepend('<li><div><span class="nom">' + val.nom + '</span> <span class="prenom">' + val.prenom + '</span></div><div><span class="fonction">' + val.fonction + '</span></div><div><span class="email">' + val.email + '</span></div><div><span class="phone">' + val.phone + '</span></div></li>');
+        //            });
+        // });
         
-        $("#map").on('pagecreate', app.initializeMap);
-        $("#select-language").change(function() {
-            alert($(this).val());
-            app.i18nInit($(this).val());
-        });
-        
+        // $("#map").on('pagecreate', app.initializeMap);
+        // $("#select-language").change(function() {
+        //     alert($(this).val());
+        //     app.i18nInit($(this).val());
+        // });
 
-        destinationType = navigator.camera.DestinationType;
-
-        var saveContactButton = document.getElementById('saveContactButton');
-        saveContactButton.addEventListener('click', function(event) { app.saveContact(event); }, true);
+        // var saveContactButton = document.getElementById('saveContactButton');
+        saveContactButton.addEventListener('click', app.saveContact, true);
         
         var takePictureButton = document.getElementById('takePicture');
-        takePictureButton.addEventListener('click', function(event) { app.takePicture(event); }, true);
+        takePictureButton.addEventListener('click', app.takePicture, true);
 
         var choosePictureAlbum = document.getElementById('choosePictureAlbum');
-
-        choosePictureAlbum.addEventListener('click', function(event) { app.choosePictureAlbum(event); }, true);
+        choosePictureAlbum.addEventListener('click', app.choosePictureAlbum, true);
         
-
-        app.receivedEvent('deviceready');
-    },
-    
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
-
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
-
-        var item = document.getElementById('modalLauncher');
-        item.setAttribute('href', '#myModal');
-
-        console.log('Received Event: ' + id);
     }
 };
