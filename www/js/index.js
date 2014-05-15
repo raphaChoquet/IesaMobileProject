@@ -135,6 +135,8 @@ var app = {
 
         var watchID = navigator.geolocation.watchPosition(app.onSuccess, app.onError);
     },
+
+
     loadContact: function() {
         
         var contactEmailElement = document.getElementById('contactEmails');
@@ -149,76 +151,55 @@ var app = {
         navigator.contacts.find(fields, this.onContactFindSuccess, this.onContactFindError, options);
     },
 
-    saveContact: function(evt) {
-        evt.preventDefault();
-        $('#contactEmails').children().each(function(){
-            
-              var name = $(this).find('.nom').html();
-              var surname = $(this).find('.prenom').html();
-              var phone = $(this).find('.phone').html();
-              var email = $(this).find('.email').html();
-              
-              var options = new ContactFindOptions();
-              options.filter = name;
-              options.multiple = true;
-              var fields = ["displayName", "nickname", "name", "phoneNumbers", "emails"];
-              var test = navigator.contacts.find(fields, onContactFindSuccess, this.onContactFindError, options);
-              
-              function onContactFindSuccess(contact) {
-                
-                  if($.isEmptyObject(contact)) {
-                      var contact = navigator.contacts.create();
-                      contact.displayName = surname;
-                      contact.nickname= surname;
-                  
-                      var contactName = new ContactName();
-                      contactName.givenName = surname;
-                      contactName.familyName = name;
-                      contact.name = contactName;
-                  
-                      var phoneNumbers = [];
-                      phoneNumbers[0] = new ContactField('work', phone, false);
-                      contact.phoneNumbers = phoneNumbers;
-                  
-                      var emails = [];
-                      emails[0] = new ContactField('work', email, true);
-                      contact.emails = emails;
-                  
-                      contact.save(this.onContactSaved, this.onContactSavedError);
-                  }
-              }
-
-        });
-    },
     onContactSavedError : function(error) {
-        alert("onContactSavedError :: " + error.code);
+        alert("Impossible de sauvegarder les contacts <br> Errreur " + error.code);
     },
     onContactSaved : function() {
-        alert("onContactSaved !");
+        var msg = 'Les contats ont bien été ajouté';
+        alert(msg);
     },
-    onContactFindSuccess: function(contacts) {
-        var contactEmailsElement = document.getElementById('contactEmails');
-        contactEmailsElement.innerHTML = '';
-        for (var i = 0; i < contacts.length; i++) {
-            var contact = contacts[i];
-            var opt = document.createElement('li');
-            opt.setAttribute('value', contact.displayName);
-            opt.setAttribute('class', 'ui-li-static ui-body-inherit ui-last-child');
-            var email = '';
-            for (var j = 0; j < contact.emails.length; j++) {
-                email = contact.emails[j].value;
-            }
-            opt.innerHTML = contact.name.givenName + ' ' + contact.name.familyName + ' : ' + email;
-            contactEmailsElement.appendChild(opt);
+
+    onContactFindSuccess: function(contact) {
+        if($.isEmptyObject(contact)) {
+            var contact = navigator.contacts.create();
+            contact.displayName = surname;
+            contact.nickname= surname;
+
+            var contactName = new ContactName();
+            contactName.givenName = surname;
+            contactName.familyName = name;
+            contact.name = contactName;
+
+            var phoneNumbers = [];
+            phoneNumbers[0] = new ContactField('work', phone, false);
+            contact.phoneNumbers = phoneNumbers;
+
+            var emails = [];
+            emails[0] = new ContactField('work', email, true);
+            contact.emails = emails;
+
+            contact.save(app.onContactSaved, app.onContactSavedError);
         }
-        var opt = document.createElement('li');
-        opt.setAttribute('value', 'Loaded!');
-        opt.setAttribute('class', 'ui-li-static ui-body-inherit ui-last-child');
-        opt.innerHTML = 'Loaded!';
-        contactEmailsElement.appendChild(opt);
     },
     onContactFindError : function(contactError) {
         alert("onContactFindError :: " + contactError.code);
+    },
+
+    saveContact: function(evt) {
+        evt.preventDefault();
+        $('#contactEmails').children().each(function(){
+            var name = $(this).find('.nom').html();
+            var surname = $(this).find('.prenom').html();
+            var phone = $(this).find('.phone').html();
+            var email = $(this).find('.email').html();
+
+            var options = new ContactFindOptions();
+            options.filter = name;
+            options.multiple = true;
+            var fields = ["displayName", "nickname", "name", "phoneNumbers", "emails"];
+            var test = navigator.contacts.find(fields, app.onContactFindSuccess, app.onContactFindError, options);
+
+        });
     },
 
 
