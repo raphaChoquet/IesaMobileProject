@@ -123,7 +123,6 @@ var app = {
 
 
     initializeMap: function () {
-        alert('init map');
         $('#map-canvas').height($(window).height()-$('#header').height()-$('#map-canvas').parent().outerHeight()-90);
         var mapOptions = {
           center: new google.maps.LatLng(48.8689041, 2.337638),
@@ -149,8 +148,9 @@ var app = {
         var fields = ["displayName", "nickname", "name", "phoneNumbers", "emails"];
         navigator.contacts.find(fields, this.onContactFindSuccess, this.onContactFindError, options);
     },
-    saveContact: function() {
-        
+
+    saveContact: function(evt) {
+        evt.preventDefault();
         $('#contactEmails').children().each(function(){
             
               var name = $(this).find('.nom').html();
@@ -162,7 +162,7 @@ var app = {
               options.filter = name;
               options.multiple = true;
               var fields = ["displayName", "nickname", "name", "phoneNumbers", "emails"];
-              var test = navigator.contacts.find(fields, onContactFindSuccess, this.onContactFindError, options);
+              var test = navigator.contacts.find(fields, onContactFindSuccess, app.onContactFindError, options);
               
               function onContactFindSuccess(contact) {
                 
@@ -184,18 +184,17 @@ var app = {
                       emails[0] = new ContactField('work', email, true);
                       contact.emails = emails;
                   
-                      contact.save(this.onContactSaved, this.onContactSavedError);
+                      contact.save(app.onContactSaved, app.onContactSavedError);
                   }
               }
 
         });
-        alert('Contact non existant importé');
     },
     onContactSavedError : function(error) {
         alert("onContactSavedError :: " + error.code);
     },
     onContactSaved : function() {
-        alert("onContactSaved !");
+        alert("Les contacts ont bien été importés !");
     },
     onContactFindSuccess: function(contacts) {
         var contactEmailsElement = document.getElementById('contactEmails');
@@ -226,11 +225,19 @@ var app = {
     //CAMERA
 
     onCameraSuccess: function (imageData) {
-        $('#flux').append('<img src="' + imageURI + '" />').append(prompt("Saisissez votre texte (optionnel) :"));
+        var d = new Date();
+        var msg = prompt("Saisissez votre texte (optionnel) :");
+        //<span class="img-date">' + d.getDate(); + '/' + d.getMonth() + '/' + d.getFullYear() + '</span>
+        var img = '<figure class="img-projet">' +
+            '<img src="' + imageData + '"">' +
+            '<figcaption><p>' + msg + '</p></figcaption>' +
+        '</figure>';
+
+        $('#flux').prepend(img);
     },
 
     onCameraFail: function (error) {
-        alert('Error Camera : ' + error.code);
+        return;
     },
 
     takePicture: function (evt) {
@@ -246,18 +253,42 @@ var app = {
         navigator.camera.getPicture(app.onCameraSuccess, app.onCameraFail, cameraOptions);
     },
 
-    choosePicture: function(source) {
+    choosePicture: function (source) {
         var chooseOptions = {
             quality: 50,
-            destinationType: destinationType.FILE_URI,
+            destinationType: Camera.DestinationType.FILE_URI,
             sourceType: source 
         };
         navigator.camera.getPicture(app.onCameraSuccess, app.onCameraFail, chooseOptions);
     },
 
-    choosePictureAlbum: function(evt) {
+    choosePictureAlbum: function (evt) {
         evt.preventDefault();
         app.choosePicture(Camera.PictureSourceType.PHOTOLIBRARY);
+    },
+
+    analytics: function () {
+        analytics.startTrackerWithId('UA-50987453-1');
+        analytics.trackView('Home');
+    },
+
+    contacts: function () {
+        $.getJSON( baseUrlJson + "contacts.json", function( data ) {
+            $.each(data.contacts, function(key, val){
+                $('#contactEmails').prepend('<li><div><span class="nom">' + val.nom + '</span> <span class="prenom">' + val.prenom + '</span></div><div><span class="fonction">' + val.fonction + '</span></div><div><span class="email">' + val.email + '</span></div><div><span class="phone">' + val.phone + '</span></div></li>');
+            });
+        });
+
+        var saveContactButton = document.getElementById('saveContactButton');
+        saveContactButton.addEventListener('click', app.saveContact, true);
+    },
+
+    camera: function () {
+        var takePictureButton = document.getElementById('takePicture');
+        takePictureButton.addEventListener('click', app.takePicture, true);
+
+        var choosePictureAlbum = document.getElementById('choosePictureAlbum');
+        choosePictureAlbum.addEventListener('click', app.choosePictureAlbum, true);
     },
 
     // deviceready Event Handler
@@ -265,10 +296,7 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        // analytics.startTrackerWithId('UA-50987453-1');
-        // analytics.trackView('Home');
 
-        // console.log('hello');
         // navigator.globalization.getPreferredLanguage(
         //     function (language) {
         //         alert(language.value);
@@ -278,27 +306,16 @@ var app = {
         //     },
         //     function () {alert('Error getting language\n');}
         // );
-
-        // $.getJSON( baseUrlJson + "contacts.json", function( data ) {
-        //           $.each(data.contacts, function(key, val){
-        //                  $('#contactEmails').prepend('<li><div><span class="nom">' + val.nom + '</span> <span class="prenom">' + val.prenom + '</span></div><div><span class="fonction">' + val.fonction + '</span></div><div><span class="email">' + val.email + '</span></div><div><span class="phone">' + val.phone + '</span></div></li>');
-        //            });
-        // });
         
-        // $("#map").on('pagecreate', app.initializeMap);
         // $("#select-language").change(function() {
         //     alert($(this).val());
         //     app.i18nInit($(this).val());
         // });
 
-        // var saveContactButton = document.getElementById('saveContactButton');
-        saveContactButton.addEventListener('click', app.saveContact, true);
-        
-        var takePictureButton = document.getElementById('takePicture');
-        takePictureButton.addEventListener('click', app.takePicture, true);
+        app.contacts();
+        app.camera();   
+        app.analytics();
 
-        var choosePictureAlbum = document.getElementById('choosePictureAlbum');
-        choosePictureAlbum.addEventListener('click', app.choosePictureAlbum, true);
-        
+        $("#map").on('pagecreate', app.initializeMap);     
     }
 };
