@@ -263,6 +263,8 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
+        analytics.startTrackerWithId('UA-50987453-1');
+        analytics.trackView('Home');
 
         navigator.globalization.getPreferredLanguage(
             function (language) {
@@ -276,7 +278,7 @@ var app = {
 
         $.getJSON( "contacts.json", function( data ) {
                   $.each(data.contacts, function(key, val){
-                         $('#contactEmails').prepend('<li><div class="pull-left"><input type="checkbox"></div><div><span class="nom">' + val.nom + '</span> <span class="prenom">' + val.prenom + '</span></div><div><span class="fonction">' + val.fonction + '</span></div><div><span class="email">' + val.email + '</span></div><div><span class="phone">' + val.phone + '</span></div></li>');
+                         $('#contactEmails').prepend('<li><div><span class="nom">' + val.nom + '</span> <span class="prenom">' + val.prenom + '</span></div><div><span class="fonction">' + val.fonction + '</span></div><div><span class="email">' + val.email + '</span></div><div><span class="phone">' + val.phone + '</span></div></li>');
                    });
         });
         
