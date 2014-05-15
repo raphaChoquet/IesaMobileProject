@@ -149,8 +149,10 @@ var app = {
         var fields = ["displayName", "nickname", "name", "phoneNumbers", "emails"];
         navigator.contacts.find(fields, this.onContactFindSuccess, this.onContactFindError, options);
     },
-    saveContact: function() {
-        
+
+    saveContact: function(evt) {
+        evt.preventDefault();
+        alert('contacts');
         $('#contactEmails').children().each(function(){
             
               var name = $(this).find('.nom').html();
@@ -226,11 +228,17 @@ var app = {
     //CAMERA
 
     onCameraSuccess: function (imageData) {
-        $('#flux').append('<img src="' + imageURI + '" />').append(prompt("Saisissez votre texte (optionnel) :"));
+        var d = new Date();
+        var img = '<figure class="img-projet">' +
+            '<img src="' + imageData+ '"">' +
+            '<figcaption><span class="img-date">' + d.getDate(); + '/' + d.getMonth() + '/' + d.getFullYear() + '</span><p>' + prompt("Saisissez votre texte (optionnel) :") + '</p></figcaption>' +
+        '</figure>';
+
+        $('#flux').prepend(img);
     },
 
     onCameraFail: function (error) {
-        alert('Error Camera : ' + error.code);
+        return;
     },
 
     takePicture: function (evt) {
@@ -247,9 +255,10 @@ var app = {
     },
 
     choosePicture: function(source) {
+        alert('choose');
         var chooseOptions = {
             quality: 50,
-            destinationType: destinationType.FILE_URI,
+            destinationType: Camera.DestinationType.FILE_URI,
             sourceType: source 
         };
         navigator.camera.getPicture(app.onCameraSuccess, app.onCameraFail, chooseOptions);
@@ -257,9 +266,29 @@ var app = {
 
     choosePictureAlbum: function(evt) {
         evt.preventDefault();
+        alert('click');
         app.choosePicture(Camera.PictureSourceType.PHOTOLIBRARY);
     },
 
+
+    contacts: function () {
+        $.getJSON( baseUrlJson + "contacts.json", function( data ) {
+            $.each(data.contacts, function(key, val){
+                $('#contactEmails').prepend('<li><div><span class="nom">' + val.nom + '</span> <span class="prenom">' + val.prenom + '</span></div><div><span class="fonction">' + val.fonction + '</span></div><div><span class="email">' + val.email + '</span></div><div><span class="phone">' + val.phone + '</span></div></li>');
+            });
+        });
+
+        var saveContactButton = document.getElementById('saveContactButton');
+        saveContactButton.addEventListener('click', app.saveContact, true);
+    },
+
+    camera: function () {
+        var takePictureButton = document.getElementById('takePicture');
+        takePictureButton.addEventListener('click', app.takePicture, true);
+
+        var choosePictureAlbum = document.getElementById('choosePictureAlbum');
+        choosePictureAlbum.addEventListener('click', app.choosePictureAlbum, true);
+    },
     // deviceready Event Handler
     //
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
@@ -291,14 +320,7 @@ var app = {
         //     app.i18nInit($(this).val());
         // });
 
-        // var saveContactButton = document.getElementById('saveContactButton');
-        saveContactButton.addEventListener('click', app.saveContact, true);
-        
-        var takePictureButton = document.getElementById('takePicture');
-        takePictureButton.addEventListener('click', app.takePicture, true);
-
-        var choosePictureAlbum = document.getElementById('choosePictureAlbum');
-        choosePictureAlbum.addEventListener('click', app.choosePictureAlbum, true);
-        
+        app.contacts();
+        app.camera();        
     }
 };
