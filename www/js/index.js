@@ -134,6 +134,7 @@ var app = {
         app.initmarkers(map);
 
         var watchID = navigator.geolocation.watchPosition(app.onSuccess, app.onError);
+        
     },
 
 
@@ -278,7 +279,10 @@ var app = {
     },
 
     contacts: function () {
+        
         $.getJSON( baseUrlJson + "contacts.json", function( data ) {
+            //supprime le texte de subsitution
+            $('#contactEmails').html('');
             $.each(data.contacts, function(key, val){
                 $('#contactEmails').prepend('<li><div><span class="nom">' + val.nom + '</span> <span class="prenom">' + val.prenom + '</span></div><div><span class="fonction">' + val.fonction + '</span></div><div><span class="email">' + val.email + '</span></div><div><span class="phone">' + val.phone + '</span></div></li>');
             });
@@ -294,6 +298,20 @@ var app = {
 
         var choosePictureAlbum = document.getElementById('choosePictureAlbum');
         choosePictureAlbum.addEventListener('click', app.choosePictureAlbum, true);
+    },
+
+    // CONNEXION
+    connexionOnline: function () {
+        //alert('Vous êtes bien connecté');
+        $('#buttonMap').attr('href', '#map');
+        $('body').off("click", '#buttonMap');
+    },
+
+    connexionOffline: function () {
+        //alert('Connection perdue');
+        $('#buttonMap').attr('href', '');
+        $('body').off("click", '#buttonMap');
+        $('body').on("click", '#buttonMap', function(){alert('Aucune connexion')});
     },
 
     // deviceready Event Handler
@@ -316,7 +334,8 @@ var app = {
         //     alert($(this).val());
         //     app.i18nInit($(this).val());
         // });
-
+        document.addEventListener("online", app.connexionOnline, false);
+        document.addEventListener("offline", app.connexionOffline, false);
         app.contacts();
         app.camera();   
         app.analytics();

@@ -46,7 +46,7 @@
             <div data-role="content"><!-- This div is the body of the prage -->
                 <!-- MULTIVIEW:3/5 -->
                 <!-- slide, slideup, slidedown, pop, fade, flip -->
-                <p><a href="#map" data-role="button" data-transition="slide">MAP</a></p>
+                <p><a id="buttonMap"href="#map" data-role="button" data-transition="slide">MAP</a></p>
                 <p><a href="#contacts" data-role="button" data-transition="slide">Contacts</a></p>
                 <p><a href="#camera" data-role="button" data-transition="slide">Camera</a></p><!-- Navigation button's href points to other page -->
                 <p><a href="#parameter" data-role="button" data-transition="slide">Parameter</a></p>
@@ -78,6 +78,7 @@
             <div data-role="content">
                 <form>
                     <ul data-role="listview" id='contactEmails' class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+                        <p>Vous devez être conncté à internet pour avoir accès la liste des contacts de l'IESA</p>
                     </ul>
                     <a href="#" id="saveContactButton" data-icon="check" title="Save Contact" data-role="button">Importer contacts</a>
                 </form>
