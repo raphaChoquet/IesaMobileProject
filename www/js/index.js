@@ -279,7 +279,10 @@ var app = {
     },
 
     contacts: function () {
+        
         $.getJSON( baseUrlJson + "contacts.json", function( data ) {
+            //supprime le texte de subsitution
+            $('#contactEmails').html('');
             $.each(data.contacts, function(key, val){
                 $('#contactEmails').prepend('<li><div><span class="nom">' + val.nom + '</span> <span class="prenom">' + val.prenom + '</span></div><div><span class="fonction">' + val.fonction + '</span></div><div><span class="email">' + val.email + '</span></div><div><span class="phone">' + val.phone + '</span></div></li>');
             });
