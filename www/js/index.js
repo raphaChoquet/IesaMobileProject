@@ -134,6 +134,7 @@ var app = {
         app.initmarkers(map);
 
         var watchID = navigator.geolocation.watchPosition(app.onSuccess, app.onError);
+        
     },
 
 
@@ -296,6 +297,19 @@ var app = {
         choosePictureAlbum.addEventListener('click', app.choosePictureAlbum, true);
     },
 
+    // CONNEXION
+    connexionOnline: function () {
+        //alert('Vous êtes bien connecté');
+        $('#buttonMap').attr('href', '#map');
+        $('body').off("click", '#buttonMap');
+    },
+
+    connexionOffline: function () {
+        //alert('Connection perdue');
+        $('#buttonMap').attr('href', '');
+        $('body').on("click", '#buttonMap', function(){alert('Aucune connexion')});
+    },
+
     // deviceready Event Handler
     //
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
@@ -316,7 +330,8 @@ var app = {
         //     alert($(this).val());
         //     app.i18nInit($(this).val());
         // });
-
+        document.addEventListener("online", app.connexionOnline, false);
+        document.addEventListener("offline", app.connexionOffline, false);
         app.contacts();
         app.camera();   
         app.analytics();
