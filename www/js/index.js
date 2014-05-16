@@ -18,7 +18,7 @@
  */
 var map;
 var myMarker;
-var baseUrlJson = 'http://37.187.2.11/appli/'
+var baseUrlJson = 'http://37.187.2.11/appli/';
 var app = {
     // Application Constructor
     initialize: function() {
@@ -279,7 +279,7 @@ var app = {
     },
 
     contacts: function () {
-        
+
         $.getJSON( baseUrlJson + "contacts.json", function( data ) {
             //supprime le texte de subsitution
             $('#contactEmails').html('');
@@ -340,6 +340,14 @@ var app = {
         app.camera();   
         app.analytics();
 
-        $("#map").on('pagecreate', app.initializeMap);     
+        $("#map").on('pagecreate', app.initializeMap);
+        $("#calendarContainer").on('pagecreate', function(){
+            setTimeout(function(){$('.fc-button-today').trigger('click')},500);
+        });
+
+        $('#calendar').fullCalendar({
+            events: 'https://www.google.com/calendar/feeds/l810nfvbc15l5krucaj1lpaiig%40group.calendar.google.com/public/basic'
+        });
+        
     }
 };
