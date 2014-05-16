@@ -307,6 +307,7 @@ var app = {
     connexionOffline: function () {
         //alert('Connection perdue');
         $('#buttonMap').attr('href', '');
+        $('body').off("click", '#buttonMap');
         $('body').on("click", '#buttonMap', function(){alert('Aucune connexion')});
     },
 
