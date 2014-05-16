@@ -85,17 +85,46 @@ body {
     text-decoration: none;
     color: #000;
 }
-/*
-.ui-btn {
-    font-size: 1.5em;
+
+
+html .ui-btn-text a.ui-btn,
+html .ui-btn-text a.ui-btn:visited {
+    background: #FFF;
+    color: #000;
 }
 
-[data-role="header"] {
-    height: 75px;
+html .ui-btn-text a.ui-btn:after,
+html .ui-btn-text a.ui-btn:visited:after {
+    opacity: 0;
+    right: 1em;
+    transition: all .3s ease-in-out;
 }
 
-[data-role="header"] .ui-btn {
-    font-size: 1.2em;
-}*/
+
+html .ui-btn-text a.ui-btn:hover::after, 
+html .ui-btn-text a.ui-btn:focus::after,
+html .ui-btn-text a.ui-btn:active::after {
+    opacity: 1;
+    right: .5625em;
+}
+
+html .ui-btn-text a.ui-btn:hover, 
+html .ui-btn-text a.ui-btn:focus,
+html .ui-btn-text a.ui-btn:active {
+    background: #FFF;
+}
+
+.sidenav {
+    background: #9b59b6 !important;
+}
+
+.sidenav h2 {
+    color: #FFF;
+    margin: 0;
+}
+
+.nav-list.ui-listview {
+    margin-top: 20px; 
+}
 
 

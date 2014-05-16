@@ -43,17 +43,23 @@
     <body>
          <!-- MULTIVIEW:1.b/5 -->
         <div data-role="page" id="home" data-theme="g" data-add-back-btn="true">
+            <div data-role="panel" id="nav-home" class="sidenav">
+                <h2>IESA Multimédia</h2>
+                <ul data-role="listview" class="nav-list">
+                    <li class="ui-btn-text"><a id="buttonMap" href="#map" data-transition="slide">Map</a></li>
+                    <li class="ui-btn-text"><a href="#contacts" data-transition="slide">Contacts</a></li>
+                    <li class="ui-btn-text"><a href="#camera" data-transition="slide">Camera</a></li>
+                    <li class="ui-btn-text"><a href="#calendarContainer" data-transition="slide">Calendrier</a></li>
+                    <li class="ui-btn-text"><a href="#parameter" data-transition="slide">Parameter</a></li>
+                </ul>
+            </div><!-- /panel -->
             <div data-role="header"><!-- This div width data role is the header, show in the black -->
+                <a href="#nav-home" data-role="button" class="ui-btn-left" data-icon="bars" data-iconpos="notext" data-inline="true">Barres</a>
                 <h1>@IESA</h1>
             </div>
             <div data-role="content"><!-- This div is the body of the prage -->
                 <!-- MULTIVIEW:3/5 -->
                 <!-- slide, slideup, slidedown, pop, fade, flip -->
-                <p><a id="buttonMap"href="#map" data-role="button" data-transition="slide">MAP</a></p>
-                <p><a href="#contacts" data-role="button" data-transition="slide">Contacts</a></p>
-                <p><a href="#camera" data-role="button" data-transition="slide">Camera</a></p><!-- Navigation button's href points to other page -->
-                <p><a href="#calendarContainer" data-role="button" data-transition="slide">Calendrier</a></p>
-                <p><a href="#parameter" data-role="button" data-transition="slide">Parameter</a></p>
             </div>
 
             <!-- MULTIVIEW:2/5 -->
@@ -70,6 +76,9 @@
             <div data-role="content" id="contentMap">
                 <p id="geoloc"></p>
                 <div id="map-canvas"></div>
+            </div>
+            <div data-role="footer" data-position="fixed">
+                <h4>OverWhite©</h4>
             </div>
         </div>
 
@@ -109,12 +118,12 @@
                 </form>
             </div>
             <div data-role="footer"  data-position="fixed">
-                <h4>Le site de l'<a href="http://www.iesa.fr/">IESA</a></h4>
+                <h4>OverWhite©</h4>
             </div>
         </div>
         
         
-        <div data-role="page" id="calendarContainer" data-theme="b" >
+        <div data-role="page" id="calendarContainer" data-theme="g" data-add-back-btn="true" data-back-btn-text="home">
             <div data-role="header" >
                 <a href="#" data-icon="back" data-rel="back" title="Go back">Back</a>
                 <h1>Calendier</h1>
@@ -123,7 +132,7 @@
 
             </div>
             <div data-role="footer"  data-position="fixed">
-                <h4>Le site de l'<a href="http://www.iesa.fr/">IESA</a></h4>
+                <h4>OverWhite©</h4>
             </div>
         </div>
 
@@ -145,7 +154,7 @@
                 </form>
             </div>
             <div data-role="footer"  data-position="fixed">
-                <h4>Le site de l'<a href="http://www.iesa.fr/">IESA</a></h4>
+                <h4>OverWhite©</h4>
             </div>
         </div>
 

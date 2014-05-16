@@ -4200,7 +4200,7 @@ html .ui-page-theme-f .ui-btn.ui-btn-active,html .ui-bar-f .ui-btn.ui-btn-active
 html .ui-page-theme-f .ui-checkbox-on:after,html .ui-bar-f .ui-checkbox-on:after,html .ui-body-f .ui-checkbox-on:after,html body .ui-group-theme-f .ui-checkbox-on:after,html .ui-btn.ui-checkbox-on.ui-btn-f:after,html background-color: primary_color{border-color:#3498db;color:#fff}
 html .ui-page-theme-f .ui-radio-on:after,html .ui-bar-f .ui-radio-on:after,html .ui-body-f .ui-radio-on:after,html body .ui-group-theme-f .ui-radio-on:after,html .ui-btn.ui-radio-on.ui-btn-f:after{background-color:#3498db;color:#fff}
 
-html .ui-bar-g,html .ui-page-theme-g .ui-bar-inherit,html .ui-bar-g .ui-bar-inherit,html .ui-body-g .ui-bar-inherit,html body .ui-group-theme-g .ui-bar-inherit{background:#9b59b6;border-color:#9b59b6;color:#fff;font-weight:bold}
+html .ui-bar-g,html .ui-page-theme-g .ui-bar-inherit,html .ui-bar-g .ui-bar-inherit,html .ui-body-g .ui-bar-inherit,html body .ui-group-theme-g .ui-bar-inherit{background:#F7E7FF;border-color:#9b59b6;color:#000;font-weight:bold}
 html .ui-bar-g{border-width:1px;border-style:solid}
 html .ui-overlay-g,html .ui-page-theme-g,html .ui-page-theme-g .ui-panel-wrapper{background:#f9f9f9;border-color:#bbb;color:#333}
 html .ui-body-g,html .ui-page-theme-g .ui-body-inherit,html .ui-bar-g .ui-body-inherit,html .ui-body-g .ui-body-inherit,html body .ui-group-theme-g .ui-body-inherit,html .ui-panel-page-container-g{background:#fff;border-color:#9b59b6;color:#333}
