@@ -117,6 +117,8 @@
                     <div id="flux">
                     </div>
                 </form>
+                <canvas id="c" width="500" height="500"></canvas>
+                <a href="#" onclick="PostImageToFacebook(token);">Poster</a>
             </div>
             <div data-role="footer"  data-position="fixed">
                 <h4>OverWhite©</h4>
@@ -160,9 +162,11 @@
         </div>
 
         <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="cdv-plugin-fb-connect.js"></script>
+        <script type="text/javascript" src="facebook-js-sdk.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();
         </script>
     </body>
-</html>
+</html>            alert(FB);

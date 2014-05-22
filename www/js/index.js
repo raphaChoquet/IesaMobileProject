@@ -17,6 +17,7 @@
  * under the License.
  */
 var map;
+var token;
 var myMarker;
 var baseUrlJson = 'http://37.187.2.11/appli/';
 var app = {
@@ -48,7 +49,7 @@ var app = {
 
                 // Accessing a simple value through the map
 
-                $('[data-i18n="msg_hello"]').text($.i18n.prop('msg_hello')));
+                //$('[data-i18n="msg_hello"]').text($.i18n.prop('msg_hello')));
             
             }
         });       
@@ -227,13 +228,47 @@ var app = {
 
     //CAMERA
 
+
+    share: function () {
+        var imageData = $(this).closest('figure').find('img').attr("src")
+
+        try {
+            blob = dataURItoBlob(imageData);
+        } catch (e) {
+            console.log(e);
+        }
+        alert('image :');
+        alert(JSON.stringify(blob));
+        var fd = new FormData();
+        fd.append("access_token", token);
+        fd.append("source", blob);
+        fd.append("message", $(this).closest('figure').find('figcaption p').text());
+        try {
+            $.ajax({
+                url: "https://graph.facebook.com/me/photos?access_token=" + token,
+                type: "POST",
+                data: fd,
+                processData: false,
+                contentType: false,
+                cache: false
+            }).done(function (data) {
+                alert('La photo a été posté sur facebook');
+            }).fail(function (shr, status, data) {
+                alert('Impossible de partager la photo');
+            });
+
+        } catch (e) {
+            console.log(e);
+        }
+    },
+
     onCameraSuccess: function (imageData) {
         var d = new Date();
         var msg = prompt("Saisissez votre texte (optionnel) :");
         //<span class="img-date">' + d.getDate(); + '/' + d.getMonth() + '/' + d.getFullYear() + '</span>
         var img = '<figure class="img-projet">' +
-            '<img src="' + imageData + '"">' +
-            '<figcaption><p>' + msg + '</p></figcaption>' +
+            '<img id="myImg" src="data:image/jpeg;base64,' + imageData + '">' +
+            '<figcaption><p>' + msg + '</p><button type="button" class="share">Share</button></figcaption>' +
         '</figure>';
 
         $('#flux').prepend(img);
@@ -250,7 +285,8 @@ var app = {
             targetHeight: 400,
             quality: 50,
             saveToPhotoAlbum: true,
-            allowEdit: true
+            allowEdit: true,
+            destinationType: Camera.DestinationType.DATA_URL
         };
 
         navigator.camera.getPicture(app.onCameraSuccess, app.onCameraFail, cameraOptions);
@@ -259,7 +295,7 @@ var app = {
     choosePicture: function (source) {
         var chooseOptions = {
             quality: 50,
-            destinationType: Camera.DestinationType.FILE_URI,
+            destinationType: Camera.DestinationType.DATA_URL,
             sourceType: source 
         };
         navigator.camera.getPicture(app.onCameraSuccess, app.onCameraFail, chooseOptions);
@@ -295,6 +331,8 @@ var app = {
 
         var choosePictureAlbum = document.getElementById('choosePictureAlbum');
         choosePictureAlbum.addEventListener('click', app.choosePictureAlbum, true);
+
+        $('#camera').on('click' ,'.share', app.share);
     },
 
     // CONNEXION
@@ -316,21 +354,25 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-
-        navigator.globalization.getPreferredLanguage(
-            function (language) {
-                alert(language.value);
-                app.i18nInit(language.value);
-                $('#select-language option[value="' + language.value + '"]').prop('selected', true);
-                $('#select-language').selectmenu('refresh');
-            },
-            function () {alert('Error getting language\n');}
-        );
-        
-        $("#select-language").change(function() {
-            alert($(this).val());
-            app.i18nInit($(this).val());
-        });
+        try {
+            FB.init({
+                appId: "871619222864601",
+                nativeInterface: CDV.FB,
+                useCachedDialogs: false
+            });
+            FB.login(function (response) {
+                if (response.authResponse) {
+                    token = response.authResponse.accessToken;
+                    FB.api('/me', function (response) {
+                        alert('Good to see you ' + response.name + '.');
+                    });
+                } else {
+                    alert('Error');
+                }
+            }, {scope: 'publish_actions'});
+        } catch (e) {
+            alert(e);
+        };
 
         document.addEventListener("online", app.connexionOnline, false);
         document.addEventListener("offline", app.connexionOffline, false);
@@ -350,4 +392,58 @@ var app = {
     }
 };
 
-app.i18nInit('en');
+function PostImageToFacebook(token) {
+    var canvas = document.getElementById("c");
+    var ctx = canvas.getContext("2d");
+    var img = document.getElementById('myImg');
+    ctx.drawImage(img, 10, 10);
+    var imageData = canvas.toDataURL("image/png");
+    alert(imageData);
+    try {
+        blob = dataURItoBlob(imageData);
+    } catch (e) {
+        console.log(e);
+    }
+    alert('image :');
+    alert(JSON.stringify(blob));
+    var fd = new FormData();
+    fd.append("access_token", token);
+    fd.append("source", blob);
+    fd.append("message", "Photo Text");
+    // try {
+    //     $.ajax({
+    //         url: "https://graph.facebook.com/me/photos?access_token=" + token,
+    //         type: "POST",
+    //         data: fd,
+    //         processData: false,
+    //         contentType: false,
+    //         cache: false,
+    //         success: function (data) {
+    //             alert("success " + data);
+    //             $("#poster").html("Posted Canvas Successfully");
+    //         },
+    //         error: function (shr, status, data) {
+    //             alert("error " + data + " Status " + shr.status);
+    //         },
+    //         complete: function () {
+    //             alert("Posted to facebook");
+    //         }
+    //     });
+
+    // } catch (e) {
+    //     console.log(e);
+    // }
+}
+
+// Convert a data URI to blob
+function dataURItoBlob(dataURI) {
+    var byteString = atob(dataURI.split(',')[1]);
+    var ab = new ArrayBuffer(byteString.length);
+    var ia = new Uint8Array(ab);
+    for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+    }
+    return new Blob([ab], {
+        type: 'image/png'
+    });
+}
