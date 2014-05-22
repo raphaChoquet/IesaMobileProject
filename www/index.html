@@ -27,15 +27,14 @@
 
          <!-- MULTIVIEW:1.a/5 -->
         <link rel="stylesheet" href="js/vendor/jquery.mobile-1.4.2.css" />
-         <link rel="stylesheet" type="text/css" href="css/jquery.mobile.flatui.css" />
+        <link rel="stylesheet" type="text/css" href="css/jquery.mobile.flatui.css" />
+        <link rel='stylesheet' href='js/fullcalendar/fullcalendar.css' />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <script src="js/vendor/jquery-1.11.0.min.js"></script>
         <script src="js/vendor/jquery.mobile-1.4.2.min.js"></script>
         <!-- link rel="stylesheet" href="http://demos.jquerymobile.com/1.4.0/them-classic/theme-classic.css" / -->
         <script src="js/vendor/jquery.i18n.properties-min-1.0.9.js"></script>
-        <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKk3HrNjUwg42_IIxbjfjBeEtc35N0BVg&sensor=true"></script>
-        <link rel='stylesheet' href='js/fullcalendar/fullcalendar.css' />
+        <script id="google-js" type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKk3HrNjUwg42_IIxbjfjBeEtc35N0BVg&sensor=true"></script>
         <script src='js/lib/moment.min.js'></script>
         <script src='js/fullcalendar/fullcalendar.js'></script>
         <script type='text/javascript' src='js/fullcalendar/gcal.js'></script>
@@ -44,13 +43,13 @@
          <!-- MULTIVIEW:1.b/5 -->
         <div data-role="page" id="home" data-theme="g" data-add-back-btn="true">
             <div data-role="panel" id="nav-home" class="sidenav">
-                <h2>IESA Multimédia</h2>
+                <h2 data-i18n="school_name">IESA Multimédia</h2>
                 <ul data-role="listview" class="nav-list">
-                    <li class="ui-btn-text"><a id="buttonMap" href="#map" data-transition="slide">Map</a></li>
-                    <li class="ui-btn-text"><a href="#contacts" data-transition="slide">Contacts</a></li>
-                    <li class="ui-btn-text"><a href="#camera" data-transition="slide">Camera</a></li>
-                    <li class="ui-btn-text"><a href="#calendarContainer" data-transition="slide">Calendrier</a></li>
-                    <li class="ui-btn-text"><a href="#parameter" data-transition="slide">Parameter</a></li>
+                    <li class="ui-btn-text"><a id="buttonMap" href="#map" data-transition="slide" data-i18n="map">Map</a></li>
+                    <li class="ui-btn-text"><a href="#contacts" data-transition="slide" data-i18n="contacts">Contacts</a></li>
+                    <li class="ui-btn-text"><a href="#camera" data-transition="slide" data-i18n="camera">Camera</a></li>
+                    <li class="ui-btn-text"><a href="#calendarContainer" data-transition="slide" data-i18n="agenda">Agenda</a></li>
+                    <li class="ui-btn-text"><a href="#parameter" data-transition="slide" data-i18n="parameter">Parameter</a></li>
                 </ul>
             </div><!-- /panel -->
             <div data-role="header"><!-- This div width data role is the header, show in the black -->
@@ -60,7 +59,6 @@
             <div data-role="content"><!-- This div is the body of the prage -->
                 <!-- MULTIVIEW:3/5 -->
                 <!-- slide, slideup, slidedown, pop, fade, flip -->
-                <p data-i18n="msg_hello" ></p>
             </div>
 
             <!-- MULTIVIEW:2/5 -->
@@ -71,8 +69,8 @@
 
          <div data-role="page" id="map" data-theme="g" data-add-back-btn="true" data-back-btn-text="home">
             <div data-role="header" id="header"><!-- This div width data role is the header, show in the black -->
-                <a href="#" data-icon="back" data-rel="back" title="Go back">Back</a>
-                <h1>MAP</h1>
+                <a href="#" data-icon="back" data-rel="back" title="Go back" data-i18n="back">Back</a>
+                <h1 data-i18n="map">Map</h1>
             </div>
             <div data-role="content" id="contentMap">
                 <p id="geoloc"></p>
@@ -86,15 +84,15 @@
         
         <div data-role="page" id="contacts" data-theme="g" data-add-back-btn="true" data-back-btn-text="home">
             <div data-role="header" >
-                <a href="#" data-icon="back" data-rel="back" title="Go back">Back</a>
-                <h1>Contact</h1>
+                <a href="#" data-icon="back" data-rel="back" title="Go back" data-i18n="back">Back</a>
+                <h1 data-i18n="contacts">Contacts</h1>
             </div>
             <div data-role="content">
                 <form>
                     <ul data-role="listview" id='contactEmails' class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
-                        <p>Vous devez être conncté à internet pour avoir accès la liste des contacts de l'IESA</p>
+                        <p data-i18n="msg_connect">You have to be connected to internet to access to the Iesa's contact list</p>
                     </ul>
-                    <a href="#" id="saveContactButton" data-icon="check" title="Save Contact" data-role="button">Importer contacts</a>
+                    <a href="#" id="saveContactButton" data-icon="check" title="Save Contact" data-role="button" data-i18n="contact_import">Import contacts</a>
                 </form>
             </div>
             <div data-role="footer"  data-position="fixed">
@@ -105,14 +103,14 @@
         
         <div data-role="page" id="camera" data-theme="g" data-add-back-btn="true" data-back-btn-text="home">
             <div data-role="header" >
-                <a href="#" data-icon="back" data-rel="back" title="Go back">Back</a>
-                <h1>Camera</h1>
+                <a href="#" data-icon="back" data-rel="back" title="Go back" data-i18n="back">Back</a>
+                <h1 data-i18n="camera">Camera</h1>
             </div>
             <div data-role="content">
                 <form>
-                    <a href="#" id="choosePictureAlbum" data-icon="camera" title="Choose a shot!" data-role="button">Choose a picture</a>
+                    <a href="#" id="choosePictureAlbum" data-icon="camera" title="Choose a shot!" data-role="button" data-i18n="choose_picture">Choose a picture</a>
                     <fieldset data-role="controlgroup">
-                        <a href="#" id="takePicture" data-icon="camera" title="Take a shot!" data-role="button">Take a shot!</a>
+                        <a href="#" id="takePicture" data-icon="camera" title="Take a shot!" data-role="button" data-i18n="take_picture" >Take a shot!</a>
                     </fieldset>
                     <div id="flux">
                     </div>
@@ -126,11 +124,10 @@
         
         <div data-role="page" id="calendarContainer" data-theme="g" data-add-back-btn="true" data-back-btn-text="home">
             <div data-role="header" >
-                <a href="#" data-icon="back" data-rel="back" title="Go back">Back</a>
-                <h1>Calendier</h1>
+                <a href="#" data-icon="back" data-rel="back" title="Go back" data-i18n="back">Back</a>
+                <h1 data-i18n="agenda">Agenda</h1>
             </div>
             <div data-role="content" id="calendar">
-
             </div>
             <div data-role="footer"  data-position="fixed">
                 <h4>OverWhite©</h4>
@@ -140,16 +137,16 @@
          <!-- PARAMETER:4/7 -->
         <div data-role="page" id="parameter" data-theme="g" data-add-back-btn="true" data-back-btn-text="home">
             <div data-role="header" >
-                <a href="#" data-icon="back" data-rel="back" title="Go back">Back</a>
-                <h1>Parameter</h1>
+                <a href="#" data-icon="back" data-rel="back" title="Go back" data-i18n="back">Back</a>
+                <h1 data-i18n="parameter">Parameter</h1>
             </div>
             <div data-role="content">
                 <form>
                     <div data-role="fieldcontain">
-                        <label for="select-language">Language :</label>
+                        <label for="select-language" data-i18n="parameter_lang">Language :</label>
                         <select name="select-language" id="select-language">
-                            <option value="fr">fr</option>
-                            <option value="en">en</option>
+                            <option value="fr_FR" data-i18n="lang_fr">French</option>
+                            <option value="en_US" data-i18n="lang_en">English</option>
                         </select>
                     </div>
                 </form>
