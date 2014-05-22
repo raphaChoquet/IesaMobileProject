@@ -67,3 +67,11 @@ Premiére journée
 - Plus :
 	- Globalization
 	- Unit tests
+
+
+URL JSON statique
+================
+
+- planning: www/planning.json
+- contacts: www/contacts.json
+- address: www/address.json
