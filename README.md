@@ -1,14 +1,14 @@
-IesaMobileProject
-=================
+Application IESA 
+================
 
-Création d'une application mobile pour l'IESA.
-Technologie imposée
+Description
+-----------
 
-Mettre en place une boucle de feedback
-
+Application d'aide à la vie quotidienne au sein de l'école à destionation des étudiants. 
+L'application se comport comme un réseaux social avec la possibilité de récupérer le contacts de l'IESA, des cours et les dates de ceux-ci etc... 
 
 Installation
-============
+------------
 
 
 Cloner le repository github
