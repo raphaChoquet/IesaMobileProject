@@ -47,16 +47,13 @@ var app = {
                 // available as JS vars/functions and as a map
 
                 // Accessing a simple value through the map
-                $.i18n.prop('msg_hello');
 
-                // Accessing a simple value through a JS variable
-                alert($.i18n.prop('msg_hello'));
+                $('[data-i18n="msg_hello"]').text($.i18n.prop('msg_hello')));
+            
             }
         });       
 
     },
-
-
     
     onSuccess: function(position) {
         var myLatlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
@@ -320,20 +317,21 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
 
-        // navigator.globalization.getPreferredLanguage(
-        //     function (language) {
-        //         alert(language.value);
-        //         app.i18nInit(language.value);
-        //         $('#select-language option[value="' + language.value + '"]').prop('selected', true);
-        //         $('#select-language').selectmenu('refresh');
-        //     },
-        //     function () {alert('Error getting language\n');}
-        // );
+        navigator.globalization.getPreferredLanguage(
+            function (language) {
+                alert(language.value);
+                app.i18nInit(language.value);
+                $('#select-language option[value="' + language.value + '"]').prop('selected', true);
+                $('#select-language').selectmenu('refresh');
+            },
+            function () {alert('Error getting language\n');}
+        );
         
-        // $("#select-language").change(function() {
-        //     alert($(this).val());
-        //     app.i18nInit($(this).val());
-        // });
+        $("#select-language").change(function() {
+            alert($(this).val());
+            app.i18nInit($(this).val());
+        });
+
         document.addEventListener("online", app.connexionOnline, false);
         document.addEventListener("offline", app.connexionOffline, false);
         app.contacts();
@@ -351,3 +349,5 @@ var app = {
         
     }
 };
+
+app.i18nInit('en');
