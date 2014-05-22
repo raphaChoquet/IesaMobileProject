@@ -1,16 +1,17 @@
 [
     {
-            "title" : "event1",
-            "start" : "2014-05-22"
+            "title" : "Projet Appli mobile",
+            "start" : "2014-05-22 09:00:00",
+            "end" : "2014-05-22 17:00:00"
     },
     {
-            "title" : "event2",
-            "start" : "2014-05-24",
-            "end" : "2014-05-25"
+            "title" : "Projet Appli mobile",
+            "start" : "2014-05-23 09:00:00",
+            "end" : "2014-05-23 17:00:00"
     },
     {
-            "title" : "event3",
-            "start" : "2014-05-28 12:30:00",
-            "allDay" : false
+            "title" : "Présentation projet Appli mobile",
+            "start" : "2014-05-30 09:00:00",
+            "end" : "2014-05-30 17:00:00"
     }
 ]

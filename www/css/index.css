@@ -137,7 +137,29 @@ html .ui-header .ui-btn:hover {
     border-color: #9b59b6;
 }
 
+html .fc, .fc table {
+    font-size: 11px
+}
 
+.fc-widget-header {
+    font-size: 11px;
+}
+
+.fc-agenda .fc-agenda-axis {
+    width: 14px !important;
+}
+
+.fc-agenda-allday {
+    display: none !important;
+}
+
+.fc-agenda-allday + .fc-agenda-divider {
+    display: none !important;
+}
+
+.fc-event-time {
+    display: none;
+}
 
 
 

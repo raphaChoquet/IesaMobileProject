@@ -314,18 +314,20 @@ var app = {
         var permanentStorage = window.localStorage;
         $.ajax({
             type: "GET",
-            url: "planning.json",
+            url: baseUrlJson + "planning.json",
             dataType: 'text'
         }).done(function(data){
             permanentStorage.setItem("eventsCalendar", data);
         }).always(function(){
             $('#calendar').fullCalendar({
-                defaultView: 'basicWeek',
+                defaultView: 'agendaWeek',
                 header: {
                     left:  'prev',
                     center: 'today',
                     right: 'next'
                 },
+                minTime: '08:00:00',
+                aspectRatio: $('body').width()/($('body').height() - $('[data-role=header]').outerHeight() - $('[data-role=footer]').outerHeight()),
                 lang:'fr',
                 events: $.parseJSON(window.localStorage.getItem("eventsCalendar"))
             });
