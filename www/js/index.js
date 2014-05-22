@@ -33,8 +33,6 @@ var app = {
         document.addEventListener('deviceready', this.onDeviceReady, false);
     },
 
-
-
     // GLObalization
 
     i18nInit: function(lang) {
@@ -43,14 +41,19 @@ var app = {
             path: 'lang/', 
             mode: 'map',
             language: lang, 
-            callback: function() {
-                // We specified mode: 'both' so translated values will be
-                // available as JS vars/functions and as a map
-
+            callback: function () {
                 // Accessing a simple value through the map
+<<<<<<< HEAD
 
                 //$('[data-i18n="msg_hello"]').text($.i18n.prop('msg_hello')));
             
+=======
+                $('[data-i18n]').each(function () {
+                    var $elm = $(this);
+                    var prop = $elm.data('i18n');
+                    $elm.text($.i18n.prop(prop));
+                });
+>>>>>>> 62020905181e55434383f8d0d8ae751e8acd8090
             }
         });       
 
@@ -196,6 +199,7 @@ var app = {
     },
     onContactSaved : function() {
         var msg = 'Les contats ont bien été ajouté';
+        //navigator.notification.vibrate(3000);
         alert(msg);
     },
 
@@ -222,7 +226,7 @@ var app = {
         }
     },
     onContactFindError : function(contactError) {
-        alert("onContactFindError :: " + contactError.code);
+        alert("Impossible de trouver les contacts :: " + contactError.code);
     },
 
 
@@ -349,6 +353,31 @@ var app = {
         $('body').on("click", '#buttonMap', function(){alert('Aucune connexion')});
     },
 
+    calendar: function (){
+        var permanentStorage = window.localStorage;
+        $.ajax({
+            type: "GET",
+            url: baseUrlJson + "planning.json",
+            dataType: 'text'
+        }).done(function(data){
+            permanentStorage.setItem("eventsCalendar", data);
+        }).always(function(){
+            $('#calendar').fullCalendar({
+                defaultView: 'agendaWeek',
+                header: {
+                    left:  'prev',
+                    center: 'today',
+                    right: 'next'
+                },
+                minTime: '08:00:00',
+                aspectRatio: $('body').width()/($('body').height() - $('[data-role=header]').outerHeight() - $('[data-role=footer]').outerHeight()),
+                lang:'fr',
+                events: $.parseJSON(window.localStorage.getItem("eventsCalendar"))
+            });
+        });
+    },
+    
+
     // deviceready Event Handler
     //
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
@@ -374,66 +403,36 @@ var app = {
             alert(e);
         };
 
+        navigator.globalization.getLocaleName(
+            function (language) {
+                app.i18nInit(language.value);
+                $('#select-language option[value="' + language.value + '"]').prop('selected', true);
+                $('#parameter').on('pagecreate', function () {
+                    $('#select-language').selectmenu('refresh', true);
+                });
+            },
+            function () {alert('Error getting language\n');}
+        );
+        
+        $("#select-language").change(function() {
+            app.i18nInit($(this).val());
+        });
+
         document.addEventListener("online", app.connexionOnline, false);
         document.addEventListener("offline", app.connexionOffline, false);
         app.contacts();
         app.camera();   
         app.analytics();
+        app.calendar();
 
         $("#map").on('pagecreate', app.initializeMap);
         $("#calendarContainer").on('pagecreate', function(){
             setTimeout(function(){$('.fc-button-today').trigger('click')},500);
         });
 
-        $('#calendar').fullCalendar({
-            events: 'https://www.google.com/calendar/feeds/l810nfvbc15l5krucaj1lpaiig%40group.calendar.google.com/public/basic'
-        });
-        
     }
 };
 
-function PostImageToFacebook(token) {
-    var canvas = document.getElementById("c");
-    var ctx = canvas.getContext("2d");
-    var img = document.getElementById('myImg');
-    ctx.drawImage(img, 10, 10);
-    var imageData = canvas.toDataURL("image/png");
-    alert(imageData);
-    try {
-        blob = dataURItoBlob(imageData);
-    } catch (e) {
-        console.log(e);
-    }
-    alert('image :');
-    alert(JSON.stringify(blob));
-    var fd = new FormData();
-    fd.append("access_token", token);
-    fd.append("source", blob);
-    fd.append("message", "Photo Text");
-    // try {
-    //     $.ajax({
-    //         url: "https://graph.facebook.com/me/photos?access_token=" + token,
-    //         type: "POST",
-    //         data: fd,
-    //         processData: false,
-    //         contentType: false,
-    //         cache: false,
-    //         success: function (data) {
-    //             alert("success " + data);
-    //             $("#poster").html("Posted Canvas Successfully");
-    //         },
-    //         error: function (shr, status, data) {
-    //             alert("error " + data + " Status " + shr.status);
-    //         },
-    //         complete: function () {
-    //             alert("Posted to facebook");
-    //         }
-    //     });
-
-    // } catch (e) {
-    //     console.log(e);
-    // }
-}
 
 // Convert a data URI to blob
 function dataURItoBlob(dataURI) {

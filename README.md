@@ -1,14 +1,14 @@
-IesaMobileProject
-=================
+Application IESA 
+================
 
-Création d'une application mobile pour l'IESA.
-Technologie imposée
+Description
+-----------
 
-Mettre en place une boucle de feedback
-
+Application d'aide à la vie quotidienne au sein de l'école à destionation des étudiants. 
+L'application se comport comme un réseaux social avec la possibilité de récupérer le contacts de l'IESA, des cours et les dates de ceux-ci etc... 
 
 Installation
-============
+------------
 
 
 Cloner le repository github
@@ -24,6 +24,7 @@ Ajout des plugins :
 ```
 cordova plugin add org.apache.cordova.camera
 cordova plugin add org.apache.cordova.contacts
+cordova plugin add org.apache.cordova.vibration
 cordova plugin add org.apache.cordova.geolocation
 cordova plugin add org.apache.cordova.globalization
 cordova plugin add org.apache.cordova.network-information
@@ -66,3 +67,11 @@ Premiére journée
 - Plus :
 	- Globalization
 	- Unit tests
+
+
+URL JSON statique
+================
+
+- planning: www/planning.json
+- contacts: www/contacts.json
+- address: www/address.json
