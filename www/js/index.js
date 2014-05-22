@@ -32,8 +32,6 @@ var app = {
         document.addEventListener('deviceready', this.onDeviceReady, false);
     },
 
-
-
     // GLObalization
 
     i18nInit: function(lang) {
@@ -194,6 +192,7 @@ var app = {
     },
     onContactSaved : function() {
         var msg = 'Les contats ont bien été ajouté';
+        //navigator.notification.vibrate(3000);
         alert(msg);
     },
 
