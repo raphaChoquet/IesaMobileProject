@@ -309,6 +309,31 @@ var app = {
         $('body').on("click", '#buttonMap', function(){alert('Aucune connexion')});
     },
 
+    calendar: function (){
+        var permanentStorage = window.localStorage;
+        $.ajax({
+            type: "GET",
+            url: baseUrlJson + "planning.json",
+            dataType: 'text'
+        }).done(function(data){
+            permanentStorage.setItem("eventsCalendar", data);
+        }).always(function(){
+            $('#calendar').fullCalendar({
+                defaultView: 'agendaWeek',
+                header: {
+                    left:  'prev',
+                    center: 'today',
+                    right: 'next'
+                },
+                minTime: '08:00:00',
+                aspectRatio: $('body').width()/($('body').height() - $('[data-role=header]').outerHeight() - $('[data-role=footer]').outerHeight()),
+                lang:'fr',
+                events: $.parseJSON(window.localStorage.getItem("eventsCalendar"))
+            });
+        });
+    },
+    
+
     // deviceready Event Handler
     //
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
@@ -335,15 +360,12 @@ var app = {
         app.contacts();
         app.camera();   
         app.analytics();
+        app.calendar();
 
         $("#map").on('pagecreate', app.initializeMap);
         $("#calendarContainer").on('pagecreate', function(){
             setTimeout(function(){$('.fc-button-today').trigger('click')},500);
         });
 
-        $('#calendar').fullCalendar({
-            events: 'https://www.google.com/calendar/feeds/l810nfvbc15l5krucaj1lpaiig%40group.calendar.google.com/public/basic'
-        });
-        
     }
 };
