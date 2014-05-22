@@ -27,6 +27,7 @@ cordova plugin add org.apache.cordova.contacts
 cordova plugin add org.apache.cordova.geolocation
 cordova plugin add org.apache.cordova.globalization
 cordova plugin add org.apache.cordova.network-information
+cordova plugin add org.apache.cordova.vibration
 cordova plugin add com.danielcwilson.plugins.googleanalytics
 ```
 
