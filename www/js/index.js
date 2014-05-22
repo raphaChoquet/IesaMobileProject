@@ -42,21 +42,17 @@ var app = {
             path: 'lang/', 
             mode: 'map',
             language: lang, 
-            callback: function() {
-                // We specified mode: 'both' so translated values will be
-                // available as JS vars/functions and as a map
-
+            callback: function () {
                 // Accessing a simple value through the map
-                $.i18n.prop('msg_hello');
-
-                // Accessing a simple value through a JS variable
-                alert($.i18n.prop('msg_hello'));
+                $('[data-i18n]').each(function () {
+                    var $elm = $(this);
+                    var prop = $elm.data('i18n');
+                    $elm.text($.i18n.prop(prop));
+                });
             }
         });       
 
     },
-
-
     
     onSuccess: function(position) {
         var myLatlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
@@ -224,7 +220,7 @@ var app = {
         }
     },
     onContactFindError : function(contactError) {
-        alert("onContactFindError :: " + contactError.code);
+        alert("Impossible de trouver les contacts :: " + contactError.code);
     },
 
 
@@ -343,20 +339,21 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
 
-        // navigator.globalization.getPreferredLanguage(
-        //     function (language) {
-        //         alert(language.value);
-        //         app.i18nInit(language.value);
-        //         $('#select-language option[value="' + language.value + '"]').prop('selected', true);
-        //         $('#select-language').selectmenu('refresh');
-        //     },
-        //     function () {alert('Error getting language\n');}
-        // );
+        navigator.globalization.getLocaleName(
+            function (language) {
+                app.i18nInit(language.value);
+                $('#select-language option[value="' + language.value + '"]').prop('selected', true);
+                $('#parameter').on('pagecreate', function () {
+                    $('#select-language').selectmenu('refresh', true);
+                });
+            },
+            function () {alert('Error getting language\n');}
+        );
         
-        // $("#select-language").change(function() {
-        //     alert($(this).val());
-        //     app.i18nInit($(this).val());
-        // });
+        $("#select-language").change(function() {
+            app.i18nInit($(this).val());
+        });
+
         document.addEventListener("online", app.connexionOnline, false);
         document.addEventListener("offline", app.connexionOffline, false);
         app.contacts();

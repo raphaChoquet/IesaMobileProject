@@ -95,8 +95,7 @@ html .ui-btn-text a.ui-btn:visited {
 
 html .ui-btn-text a.ui-btn:after,
 html .ui-btn-text a.ui-btn:visited:after {
-    opacity: 0;
-    right: 1em;
+    right: 1.2em;
     transition: all .3s ease-in-out;
 }
 
@@ -112,6 +111,7 @@ html .ui-btn-text a.ui-btn:hover,
 html .ui-btn-text a.ui-btn:focus,
 html .ui-btn-text a.ui-btn:active {
     background: #FFF;
+    color: #000;
 }
 
 .sidenav {
@@ -126,5 +126,18 @@ html .ui-btn-text a.ui-btn:active {
 .nav-list.ui-listview {
     margin-top: 20px; 
 }
+
+html .ui-header .ui-btn {
+    background: transparent;
+    border: 0;
+}
+html .ui-header .ui-btn:focus,
+html .ui-header .ui-btn:hover {
+    background: #9b59b6;
+    border-color: #9b59b6;
+}
+
+
+
 
 
