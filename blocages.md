@@ -91,3 +91,17 @@ ensuite on doit créer un objet formData avec les clés :
 
 Puis il ne reste plus qu'à faire une requête ajax sans utiliser FB.api
 
+
+JOUR 5
+======
+
+BLOCAGE 1
+----------
+
+Critique : oui
+
+Platform : Application Android
+
+Plobléme : Erreur lors du bluid sous android avec le plugin phonegap-facebook-plugin
+
+
