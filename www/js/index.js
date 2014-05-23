@@ -36,7 +36,7 @@ var app = {
 
     // GLObalization
 
-    i18nInit: function(lang) {
+    i18nInit: function() {
         jQuery.i18n.properties({
             name: 'Messages', 
             path: 'lang/', 
@@ -44,17 +44,11 @@ var app = {
             language: lang, 
             callback: function () {
                 // Accessing a simple value through the map
-<<<<<<< HEAD
-
-                //$('[data-i18n="msg_hello"]').text($.i18n.prop('msg_hello')));
-            
-=======
                 $('[data-i18n]').each(function () {
                     var $elm = $(this);
                     var prop = $elm.data('i18n');
                     $elm.text($.i18n.prop(prop));
                 });
->>>>>>> 62020905181e55434383f8d0d8ae751e8acd8090
             }
         });       
 
@@ -232,13 +226,11 @@ var app = {
 
 
     //CAMERA
-
-
     share: function () {
-        var imageData = $(this).closest('figure').find('img').attr("src")
+        var imageData = $(this).closest('figure').find('img').attr("src");
 
         try {
-            blob = dataURItoBlob(imageData);
+            blob = app.dataURItoBlob(imageData);
         } catch (e) {
             console.log(e);
         }
@@ -266,6 +258,20 @@ var app = {
             console.log(e);
         }
     },
+
+    // Convert a data URI to blob
+    dataURItoBlob: function (dataURI) {
+        var byteString = atob(dataURI.split(',')[1]);
+        var ab = new ArrayBuffer(byteString.length);
+        var ia = new Uint8Array(ab);
+        for (var i = 0; i < byteString.length; i++) {
+            ia[i] = byteString.charCodeAt(i);
+        }
+        return new Blob([ab], {
+            type: 'image/png'
+        });
+    },
+
 
     onCameraSuccess: function (imageData) {
         var d = new Date();
@@ -356,6 +362,15 @@ var app = {
 
     calendar: function (){
         var permanentStorage = window.localStorage;
+        var langDate;
+
+        if (lang.indexOf("fr") != -1) {
+            langDate = "fr";
+        } else if (lang.indexOf("fr") != -1) {
+            langDate = "en";
+        } else {
+            langDate = lang;
+        }
         $.ajax({
             type: "GET",
             url: baseUrlJson + "planning.json",
@@ -372,7 +387,7 @@ var app = {
                 },
                 minTime: '08:00:00',
                 aspectRatio: $('body').width()/($('body').height() - $('[data-role=header]').outerHeight() - $('[data-role=footer]').outerHeight()),
-                lang:'fr',
+                lang: langDate,
                 events: $.parseJSON(window.localStorage.getItem("eventsCalendar"))
             });
         });
@@ -407,7 +422,7 @@ var app = {
         navigator.globalization.getLocaleName(
             function (language) {
                 lang = language.value;
-                app.i18nInit(language.value);
+                app.i18nInit();
                 $('#select-language option[value="' + language.value + '"]').prop('selected', true);
                 $('#parameter').on('pagecreate', function () {
                     $('#select-language').selectmenu('refresh', true);
@@ -417,7 +432,8 @@ var app = {
         );
         
         $("#select-language").change(function() {
-            app.i18nInit($(this).val());
+            lang = $(this).val();
+            app.i18nInit();
         });
 
         document.addEventListener("online", app.connexionOnline, false);
@@ -434,17 +450,3 @@ var app = {
 
     }
 };
-
-
-// Convert a data URI to blob
-function dataURItoBlob(dataURI) {
-    var byteString = atob(dataURI.split(',')[1]);
-    var ab = new ArrayBuffer(byteString.length);
-    var ia = new Uint8Array(ab);
-    for (var i = 0; i < byteString.length; i++) {
-        ia[i] = byteString.charCodeAt(i);
-    }
-    return new Blob([ab], {
-        type: 'image/png'
-    });
-}
