@@ -130,6 +130,26 @@ var app = {
         app.initmarkers(map);
 
         var watchID = navigator.geolocation.watchPosition(app.onSuccess, app.onError);
+
+
+        function onSuccess(heading) {
+            var nord = 360 - heading.magneticHeading;
+            $('#compass').css({
+                'transform':'rotate(' + nord + 'deg)',
+                '-ms-transform':'rotate(' + nord + 'deg)',
+                '-webkit-transform':'rotate(' + nord + 'deg)'
+            });
+        };
+
+        function onError(compassError) {
+            alert('Compass error: ' + compassError.code);
+        };
+
+        var options = {
+            frequency: 50
+        }; // Update every 3 seconds
+
+        var watchID = navigator.compass.watchHeading(onSuccess, onError, options);
         
     },
 
@@ -447,6 +467,7 @@ var app = {
         $("#calendarContainer").on('pagecreate', function(){
             setTimeout(function(){$('.fc-button-today').trigger('click')},500);
         });
+
 
     }
 };
