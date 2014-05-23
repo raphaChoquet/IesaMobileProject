@@ -17,7 +17,7 @@ Solution : Debug sur smartphone Android physique
 JOUR 2
 ======
 
-BLOCAGE 2
+BLOCAGE 1
 ---------
 
 Critique : oui
@@ -27,6 +27,18 @@ Platform : Application Android sous Mac OS
 Problème : Plugin contact et camera impossible a faire fonctionner sous Android 
 
 Solution : Utilisation de cordova 3.5.0
+
+
+BLOCAGE 2
+---------
+
+Critique : non
+
+Platform : Application Android et IOS sous Mac OS 
+
+Problème : En utilisant le plugin jQuery.i18n.properties, impossible d'afficher la valeur des propriété 
+
+Solution : Ne pas tester sous chrome qui affiche la clé au lui de sa valeur. Il faut aussi définir le mode à 'map' et utiliser la fonction $.i18n.prop();
 
 
 JOUR 3
