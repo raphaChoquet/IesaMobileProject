@@ -19,6 +19,7 @@
 var map;
 var myMarker;
 var baseUrlJson = 'http://37.187.2.11/appli/';
+var lang = 'en_US';
 var app = {
     // Application Constructor
     initialize: function() {
@@ -342,6 +343,7 @@ var app = {
 
         navigator.globalization.getLocaleName(
             function (language) {
+                lang = language.value;
                 app.i18nInit(language.value);
                 $('#select-language option[value="' + language.value + '"]').prop('selected', true);
                 $('#parameter').on('pagecreate', function () {
