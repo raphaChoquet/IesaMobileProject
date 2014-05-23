@@ -129,6 +129,26 @@ var app = {
         app.initmarkers(map);
 
         var watchID = navigator.geolocation.watchPosition(app.onSuccess, app.onError);
+
+
+        function onSuccess(heading) {
+            var nord = 360 - heading.magneticHeading;
+            $('#compass').css({
+                'transform':'rotate(' + nord + 'deg)',
+                '-ms-transform':'rotate(' + nord + 'deg)',
+                '-webkit-transform':'rotate(' + nord + 'deg)'
+            });
+        };
+
+        function onError(compassError) {
+            alert('Compass error: ' + compassError.code);
+        };
+
+        var options = {
+            frequency: 50
+        }; // Update every 3 seconds
+
+        var watchID = navigator.compass.watchHeading(onSuccess, onError, options);
         
     },
 
@@ -192,8 +212,8 @@ var app = {
         alert("Impossible de sauvegarder les contacts <br> Errreur " + error.code);
     },
     onContactSaved : function() {
-        var msg = 'Les contats ont bien été ajouté';
-        navigator.notification.vibrate(2500);
+        var msg = 'Les contats ont bien été ajoutés';
+        navigator.notification.vibrate(3000);
         alert(msg);
     },
 
@@ -239,7 +259,7 @@ var app = {
         //<span class="img-date">' + d.getDate(); + '/' + d.getMonth() + '/' + d.getFullYear() + '</span>
         var img = '<figure class="img-projet">' +
             '<img id="myImg" src="data:image/jpeg;base64,' + imageData + '">' +
-            '<figcaption><p>' + msg + '</p><button type="button" class="share">Share</button></figcaption>' +
+            '<figcaption><p>' + msg + '</p><button class="ui-btn ui-btn-inline ui-shadow ui-corner-all share" type="button" >Share</button></figcaption>' +
         '</figure>';
 
         $('#flux').prepend(img);
@@ -359,7 +379,6 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-
         navigator.globalization.getLocaleName(
             function (language) {
                 lang = language.value;
