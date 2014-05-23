@@ -58,7 +58,6 @@ var app = {
         var myLatlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
         if (myMarker) {
             myMarker.setPosition(myLatlng);
-
         } else {
             myMarker = new google.maps.Marker({
                 position: myLatlng,
@@ -194,7 +193,7 @@ var app = {
     },
     onContactSaved : function() {
         var msg = 'Les contats ont bien été ajouté';
-        //navigator.notification.vibrate(3000);
+        navigator.notification.vibrate(2500);
         alert(msg);
     },
 
@@ -228,48 +227,9 @@ var app = {
     //CAMERA
     share: function () {
         var imageData = $(this).closest('figure').find('img').attr("src");
+        var msg = $(this).closest('figure').find('figcaption p').text();
+        window.plugins.socialsharing.share(msg, null,  imageData, null);
 
-        try {
-            blob = app.dataURItoBlob(imageData);
-        } catch (e) {
-            console.log(e);
-        }
-        alert('image :');
-        alert(JSON.stringify(blob));
-        var fd = new FormData();
-        fd.append("access_token", token);
-        fd.append("source", blob);
-        fd.append("message", $(this).closest('figure').find('figcaption p').text());
-        try {
-            $.ajax({
-                url: "https://graph.facebook.com/me/photos?access_token=" + token,
-                type: "POST",
-                data: fd,
-                processData: false,
-                contentType: false,
-                cache: false
-            }).done(function (data) {
-                alert('La photo a été posté sur facebook');
-            }).fail(function (shr, status, data) {
-                alert('Impossible de partager la photo');
-            });
-
-        } catch (e) {
-            console.log(e);
-        }
-    },
-
-    // Convert a data URI to blob
-    dataURItoBlob: function (dataURI) {
-        var byteString = atob(dataURI.split(',')[1]);
-        var ab = new ArrayBuffer(byteString.length);
-        var ia = new Uint8Array(ab);
-        for (var i = 0; i < byteString.length; i++) {
-            ia[i] = byteString.charCodeAt(i);
-        }
-        return new Blob([ab], {
-            type: 'image/png'
-        });
     },
 
 
@@ -399,25 +359,6 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        try {
-            FB.init({
-                appId: "871619222864601",
-                nativeInterface: CDV.FB,
-                useCachedDialogs: false
-            });
-            FB.login(function (response) {
-                if (response.authResponse) {
-                    token = response.authResponse.accessToken;
-                    FB.api('/me', function (response) {
-                        alert('Good to see you ' + response.name + '.');
-                    });
-                } else {
-                    alert('Error');
-                }
-            }, {scope: 'publish_actions'});
-        } catch (e) {
-            alert(e);
-        };
 
         navigator.globalization.getLocaleName(
             function (language) {
@@ -447,6 +388,5 @@ var app = {
         $("#calendarContainer").on('pagecreate', function(){
             setTimeout(function(){$('.fc-button-today').trigger('click')},500);
         });
-
     }
 };
