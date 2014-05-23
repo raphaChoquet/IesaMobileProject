@@ -193,8 +193,8 @@ var app = {
         alert("Impossible de sauvegarder les contacts <br> Errreur " + error.code);
     },
     onContactSaved : function() {
-        var msg = 'Les contats ont bien été ajouté';
-        //navigator.notification.vibrate(3000);
+        var msg = 'Les contats ont bien été ajoutés';
+        navigator.notification.vibrate(3000);
         alert(msg);
     },
 
@@ -279,7 +279,7 @@ var app = {
         //<span class="img-date">' + d.getDate(); + '/' + d.getMonth() + '/' + d.getFullYear() + '</span>
         var img = '<figure class="img-projet">' +
             '<img id="myImg" src="data:image/jpeg;base64,' + imageData + '">' +
-            '<figcaption><p>' + msg + '</p><button type="button" class="share">Share</button></figcaption>' +
+            '<figcaption><p>' + msg + '</p><button class="ui-btn ui-btn-inline ui-shadow ui-corner-all share" type="button" >Share</button></figcaption>' +
         '</figure>';
 
         $('#flux').prepend(img);
@@ -399,25 +399,27 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        try {
-            FB.init({
-                appId: "871619222864601",
-                nativeInterface: CDV.FB,
-                useCachedDialogs: false
-            });
-            FB.login(function (response) {
-                if (response.authResponse) {
-                    token = response.authResponse.accessToken;
-                    FB.api('/me', function (response) {
-                        alert('Good to see you ' + response.name + '.');
-                    });
-                } else {
-                    alert('Error');
-                }
-            }, {scope: 'publish_actions'});
-        } catch (e) {
-            alert(e);
-        };
+
+
+        // try {
+        //     FB.init({
+        //         appId: "871619222864601",
+        //         nativeInterface: CDV.FB,
+        //         useCachedDialogs: false
+        //     });
+        //     FB.login(function (response) {
+        //         if (response.authResponse) {
+        //             token = response.authResponse.accessToken;
+        //             FB.api('/me', function (response) {
+        //                 alert('Good to see you ' + response.name + '.');
+        //             });
+        //         } else {
+        //             alert('Error');
+        //         }
+        //     }, {scope: 'publish_actions'});
+        // } catch (e) {
+        //     alert(e);
+        // };
 
         navigator.globalization.getLocaleName(
             function (language) {

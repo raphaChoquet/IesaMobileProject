@@ -161,5 +161,21 @@ html .fc, .fc table {
     display: none;
 }
 
+.img-projet {
+    margin: 0;
+    max-width: 100%;
+    text-align: center;
+}
 
+.img-projet figcaption {
+    text-align: left;
+    margin-bottom: 10px;
+}
 
+.img-projet img {
+    max-width: 100%;
+}
+
+.img-projet button.ui-btn {
+    margin-bottom: 10px;
+}
