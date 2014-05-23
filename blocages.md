@@ -91,7 +91,6 @@ ensuite on doit créer un objet formData avec les clés :
 
 Puis il ne reste plus qu'à faire une requête ajax sans utiliser FB.api
 
-
 JOUR 5
 ======
 
@@ -103,5 +102,19 @@ Critique : oui
 Platform : Application Android
 
 Plobléme : Erreur lors du bluid sous android avec le plugin phonegap-facebook-plugin
+
+Solution :  Importer le projet Android dans Eclipse ADT et puis aller dans les propriété du projet et ajouter la librairie FacebookLib
+
+BLOCAGE 2
+---------
+
+Critique : oui
+
+Platform : Application Android
+
+Probléme : Impossible de se connecter à facebook avec le plugin
+
+Solution : Aucune, le plugin n'est pas encore fonctionnel sous Android.
+
 
 
