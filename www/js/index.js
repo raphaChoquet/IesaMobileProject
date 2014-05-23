@@ -17,6 +17,7 @@
  * under the License.
  */
 var map;
+var token;
 var myMarker;
 var baseUrlJson = 'http://37.187.2.11/appli/';
 var lang = 'en_US';
@@ -43,11 +44,17 @@ var app = {
             language: lang, 
             callback: function () {
                 // Accessing a simple value through the map
+<<<<<<< HEAD
+
+                //$('[data-i18n="msg_hello"]').text($.i18n.prop('msg_hello')));
+            
+=======
                 $('[data-i18n]').each(function () {
                     var $elm = $(this);
                     var prop = $elm.data('i18n');
                     $elm.text($.i18n.prop(prop));
                 });
+>>>>>>> 62020905181e55434383f8d0d8ae751e8acd8090
             }
         });       
 
@@ -226,13 +233,47 @@ var app = {
 
     //CAMERA
 
+
+    share: function () {
+        var imageData = $(this).closest('figure').find('img').attr("src")
+
+        try {
+            blob = dataURItoBlob(imageData);
+        } catch (e) {
+            console.log(e);
+        }
+        alert('image :');
+        alert(JSON.stringify(blob));
+        var fd = new FormData();
+        fd.append("access_token", token);
+        fd.append("source", blob);
+        fd.append("message", $(this).closest('figure').find('figcaption p').text());
+        try {
+            $.ajax({
+                url: "https://graph.facebook.com/me/photos?access_token=" + token,
+                type: "POST",
+                data: fd,
+                processData: false,
+                contentType: false,
+                cache: false
+            }).done(function (data) {
+                alert('La photo a été posté sur facebook');
+            }).fail(function (shr, status, data) {
+                alert('Impossible de partager la photo');
+            });
+
+        } catch (e) {
+            console.log(e);
+        }
+    },
+
     onCameraSuccess: function (imageData) {
         var d = new Date();
         var msg = prompt("Saisissez votre texte (optionnel) :");
         //<span class="img-date">' + d.getDate(); + '/' + d.getMonth() + '/' + d.getFullYear() + '</span>
         var img = '<figure class="img-projet">' +
-            '<img src="' + imageData + '"">' +
-            '<figcaption><p>' + msg + '</p></figcaption>' +
+            '<img id="myImg" src="data:image/jpeg;base64,' + imageData + '">' +
+            '<figcaption><p>' + msg + '</p><button type="button" class="share">Share</button></figcaption>' +
         '</figure>';
 
         $('#flux').prepend(img);
@@ -249,7 +290,8 @@ var app = {
             targetHeight: 400,
             quality: 50,
             saveToPhotoAlbum: true,
-            allowEdit: true
+            allowEdit: true,
+            destinationType: Camera.DestinationType.DATA_URL
         };
 
         navigator.camera.getPicture(app.onCameraSuccess, app.onCameraFail, cameraOptions);
@@ -258,7 +300,7 @@ var app = {
     choosePicture: function (source) {
         var chooseOptions = {
             quality: 50,
-            destinationType: Camera.DestinationType.FILE_URI,
+            destinationType: Camera.DestinationType.DATA_URL,
             sourceType: source 
         };
         navigator.camera.getPicture(app.onCameraSuccess, app.onCameraFail, chooseOptions);
@@ -294,6 +336,8 @@ var app = {
 
         var choosePictureAlbum = document.getElementById('choosePictureAlbum');
         choosePictureAlbum.addEventListener('click', app.choosePictureAlbum, true);
+
+        $('#camera').on('click' ,'.share', app.share);
     },
 
     // CONNEXION
@@ -340,6 +384,25 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
+        try {
+            FB.init({
+                appId: "871619222864601",
+                nativeInterface: CDV.FB,
+                useCachedDialogs: false
+            });
+            FB.login(function (response) {
+                if (response.authResponse) {
+                    token = response.authResponse.accessToken;
+                    FB.api('/me', function (response) {
+                        alert('Good to see you ' + response.name + '.');
+                    });
+                } else {
+                    alert('Error');
+                }
+            }, {scope: 'publish_actions'});
+        } catch (e) {
+            alert(e);
+        };
 
         navigator.globalization.getLocaleName(
             function (language) {
@@ -371,3 +434,17 @@ var app = {
 
     }
 };
+
+
+// Convert a data URI to blob
+function dataURItoBlob(dataURI) {
+    var byteString = atob(dataURI.split(',')[1]);
+    var ab = new ArrayBuffer(byteString.length);
+    var ia = new Uint8Array(ab);
+    for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+    }
+    return new Blob([ab], {
+        type: 'image/png'
+    });
+}
