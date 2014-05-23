@@ -30,7 +30,7 @@ cordova plugin add org.apache.cordova.globalization
 cordova plugin add org.apache.cordova.device-orientation
 cordova plugin add org.apache.cordova.network-information
 cordova plugin add com.danielcwilson.plugins.googleanalytics
-cordova -d plugin add https://github.com/phonegap/phonegap-facebook-plugin --variable APP_ID="871619222864601" --variable APP_NAME="Iesa"
+cordova plugin add https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin.git
 ```
 
 Lancer la commande 
