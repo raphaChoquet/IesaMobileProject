@@ -146,7 +146,7 @@ var app = {
 
         var options = {
             frequency: 50
-        }; // Update every 3 seconds
+        };
 
         var watchID = navigator.compass.watchHeading(onSuccess, onError, options);
         
@@ -372,6 +372,21 @@ var app = {
             });
         });
     },
+    accelerometer: function() {
+        function onSuccess(acceleration) {
+            if(acceleration.x >= 10 || acceleration.y >= 10 || acceleration.z >= 10) {
+                $.mobile.back();
+            }
+        };
+
+        function onError() {
+            alert('onError!');
+        };
+
+        var options = { frequency: 50 };
+
+        var watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
+    },
     
 
     // deviceready Event Handler
@@ -379,6 +394,27 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
+
+        try {
+            FB.init({
+                appId: "871619222864601",
+                nativeInterface: CDV.FB,
+                useCachedDialogs: false
+            });
+            FB.login(function (response) {
+                if (response.authResponse) {
+                    token = response.authResponse.accessToken;
+                    FB.api('/me', function (response) {
+                        alert('Good to see you ' + response.name + '.');
+                    });
+                } else {
+                    alert('Error');
+                }
+            }, {scope: 'publish_actions'});
+        } catch (e) {
+            alert(e);
+        };
+
         navigator.globalization.getLocaleName(
             function (language) {
                 lang = language.value;
@@ -402,6 +438,7 @@ var app = {
         app.camera();   
         app.analytics();
         app.calendar();
+        app.accelerometer();
 
         $("#map").on('pagecreate', app.initializeMap);
         $("#calendarContainer").on('pagecreate', function(){
