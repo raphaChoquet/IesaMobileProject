@@ -395,26 +395,6 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
 
-        try {
-            FB.init({
-                appId: "871619222864601",
-                nativeInterface: CDV.FB,
-                useCachedDialogs: false
-            });
-            FB.login(function (response) {
-                if (response.authResponse) {
-                    token = response.authResponse.accessToken;
-                    FB.api('/me', function (response) {
-                        alert('Good to see you ' + response.name + '.');
-                    });
-                } else {
-                    alert('Error');
-                }
-            }, {scope: 'publish_actions'});
-        } catch (e) {
-            alert(e);
-        };
-
         navigator.globalization.getLocaleName(
             function (language) {
                 lang = language.value;
