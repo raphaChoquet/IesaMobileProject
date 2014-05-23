@@ -21,6 +21,7 @@ var token;
 var myMarker;
 var baseUrlJson = 'http://37.187.2.11/appli/';
 var lang = 'en_US';
+var accelerometerOption = true;
 var app = {
     // Application Constructor
     initialize: function() {
@@ -141,7 +142,7 @@ var app = {
         };
 
         function onError(compassError) {
-            alert('Compass error: ' + compassError.code);
+            
         };
 
         var options = {
@@ -374,13 +375,13 @@ var app = {
     },
     accelerometer: function() {
         function onSuccess(acceleration) {
-            if(acceleration.x >= 10 || acceleration.y >= 10 || acceleration.z >= 10) {
+            if((acceleration.x >= 18 || acceleration.y >= 18 || acceleration.z >= 18) && accelerometerOption) {
                 $.mobile.back();
             }
         };
 
         function onError() {
-            alert('onError!');
+            
         };
 
         var options = { frequency: 50 };
