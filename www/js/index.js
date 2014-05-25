@@ -21,7 +21,7 @@ var token;
 var myMarker;
 var baseUrlJson = 'http://37.187.2.11/appli/';
 var lang = 'en_US';
-var accelerometerOption = true;
+var accelerometerOption = 'true';
 var app = {
     // Application Constructor
     initialize: function() {
@@ -377,7 +377,7 @@ var app = {
         function onSuccess(acceleration) {
                 var accelerationTotal = Math.abs(acceleration.x) + Math.abs(acceleration.y) + Math.abs(acceleration.z);
 
-                if(accelerationTotal > 20) {
+                if(accelerationTotal > 20 && accelerometerOption == 'true') {
                     $.mobile.back();
                 }
         };
@@ -414,9 +414,16 @@ var app = {
             lang = $(this).val();
             app.i18nInit();
 
+            //Force l'actualisation du parametre de l'accéléromètre pour le traduire
+            $('#select-accelerometer').selectmenu('refresh', true);
+
             //Changement de langue du calendrier
             $('#calendar').fullCalendar('destroy');
             app.calendar();
+        });
+
+        $('#select-accelerometer').change(function(){
+            accelerometerOption = $(this).val();
         });
 
         document.addEventListener("online", app.connexionOnline, false);
