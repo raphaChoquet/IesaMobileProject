@@ -375,16 +375,18 @@ var app = {
     },
     accelerometer: function() {
         function onSuccess(acceleration) {
-            if((acceleration.x >= 18 || acceleration.y >= 18 || acceleration.z >= 18) && accelerometerOption) {
-                $.mobile.back();
-            }
+                var accelerationTotal = Math.abs(acceleration.x) + Math.abs(acceleration.y) + Math.abs(acceleration.z);
+
+                if(accelerationTotal > 20) {
+                    $.mobile.back();
+                }
         };
 
         function onError() {
             
         };
 
-        var options = { frequency: 50 };
+        var options = { frequency: 200 };
 
         var watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
     },
