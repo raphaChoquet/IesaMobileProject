@@ -413,6 +413,10 @@ var app = {
         $("#select-language").change(function() {
             lang = $(this).val();
             app.i18nInit();
+
+            //Changement de langue du calendrier
+            $('#calendar').fullCalendar('destroy');
+            app.calendar();
         });
 
         document.addEventListener("online", app.connexionOnline, false);
@@ -424,8 +428,8 @@ var app = {
         app.accelerometer();
 
         $("#map").on('pagecreate', app.initializeMap);
-        $("#calendarContainer").on('pagecreate', function(){
-            setTimeout(function(){$('.fc-button-today').trigger('click')},500);
+        $("#calendarContainer").on('pageshow', function(){
+            $('.fc-button-today').trigger('click');
         });
     }
 };
