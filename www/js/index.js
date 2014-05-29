@@ -208,15 +208,14 @@ var app = {
               }
 
         });
-        navigator.notification.vibrate(500);
     },
     onContactSavedError : function(error) {
         alert("Impossible de sauvegarder les contacts <br> Errreur " + error.code);
     },
     onContactSaved : function() {
-       /** var msg = 'Les contats ont bien été ajoutés';
+        var msg = 'Les contats ont bien été ajoutés';
         navigator.notification.vibrate(500);
-        alert(msg);**/
+        alert(msg);
     },
 
     onContactFindSuccess: function(contact) {
