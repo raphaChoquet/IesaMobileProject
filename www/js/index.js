@@ -330,15 +330,15 @@ var app = {
     // CONNEXION
     connexionOnline: function () {
         //alert('Vous êtes bien connecté');
-        $('#buttonMap').attr('href', '#map');
-        $('body').off("click", '#buttonMap');
+        $('#.uttonMap').attr('href', '#map');
+        $('body').off("click", '.buttonMap');
     },
 
     connexionOffline: function () {
         //alert('Connection perdue');
-        $('#buttonMap').attr('href', '');
-        $('body').off("click", '#buttonMap');
-        $('body').on("click", '#buttonMap', function(){alert('Aucune connexion')});
+        $('.buttonMap').attr('href', '');
+        $('body').off("click", '.buttonMap');
+        $('body').on("click", '.buttonMap', function(){alert('Aucune connexion')});
     },
 
     calendar: function (){
