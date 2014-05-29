@@ -149,7 +149,7 @@ var app = {
             frequency: 50
         };
 
-        var watchID = navigator.compass.watchHeading(onSuccess, onError, options);
+        var watchCompass = navigator.compass.watchHeading(onSuccess, onError, options);
         
     },
 
