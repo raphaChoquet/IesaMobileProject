@@ -214,7 +214,7 @@ var app = {
     },
     onContactSaved : function() {
         var msg = 'Les contats ont bien été ajoutés';
-        navigator.notification.vibrate(3000);
+        navigator.notification.vibrate(500);
         alert(msg);
     },
 
