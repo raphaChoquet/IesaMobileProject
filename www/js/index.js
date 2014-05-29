@@ -55,7 +55,7 @@ var app = {
 
     },
     
-    onSuccess: function(position) {
+    onMapSuccess: function(position) {
         var myLatlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
         if (myMarker) {
             myMarker.setPosition(myLatlng);
@@ -63,13 +63,13 @@ var app = {
             myMarker = new google.maps.Marker({
                 position: myLatlng,
                 map: map,
-                title: "Ma position"
+                title: "Position"
             });
         }
         $('#geoloc').html('LAT: ' + position.coords.latitude + ' / LONG: ' + position.coords.longitude);
     },
 
-    onError: function(error) {
+    onMapError: function(error) {
         alert('code: '    + error.code    + '\n' +
               'message: ' + error.message + '\n');
     },
@@ -129,7 +129,7 @@ var app = {
 
         app.initmarkers(map);
 
-        var watchID = navigator.geolocation.watchPosition(app.onSuccess, app.onError);
+        var watchID = navigator.geolocation.watchPosition(app.onMapSuccess, app.onMapError);
 
 
         function onSuccess(heading) {
